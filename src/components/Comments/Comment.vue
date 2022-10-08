@@ -1,0 +1,147 @@
+<template>
+	<div class="comment">
+		<div class="container">
+			<div class="row">
+				<div class="comment-heading col-12">
+					<img
+						class="comment-dp img"
+						src="../../assets/comment-dp.png"
+						alt=""
+					/>
+					<span class="comment-name">{{ comment_data.commentor_name }}</span>
+					<span v-if="comment_data.commentor_type != 'None'" class="comment-seller">{{ comment_data.commentor_type }}</span>
+					<span class="light-text comment-time">
+						{{ comment_data.published_time }}
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<p class="comment-txt">
+						<span class="reply-to">{{ reply_to_username }}</span>
+						{{ comment_data.comment }}
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="light-txt reply-txt-section">
+					<span @click="reply_clicked" class="reply-txt">
+						Reply <font-awesome-icon icon="fa-solid fa-arrow-alt-circle-down" />
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	import $ from 'jquery';
+	import axios from 'axios';
+
+	export default {
+		name: 'Comment',
+		props: {
+			comment_data: {
+				default: [],
+			},
+		},
+		data() {
+			return {
+				reply_to_username: '',
+			};
+		},
+		methods: {
+			reply_clicked() {
+				let c = 'Re: ' + this.comment_data.commentor_name;
+				let obj = {
+					reply_to_id: this.comment_data.commentor,
+					reply_to_commentor: c,
+				};
+				this.$emit('replyuser', obj);
+			},
+			async fetchUsername() {
+				await axios
+					.get(
+						`http://127.0.0.1:8000/api/users/user/${this.comment_data.reply_to}/`
+					)
+					.then((response) => {
+						this.reply_to_username = 'Re: ' + response.data.user_name;
+					})
+					.catch((error) => {
+						console.log('error:', error);
+					});
+			},
+		},
+		mounted() {
+			if (this.comment_data.reply_to != null) {
+				this.fetchUsername();
+				$('.reply-to').css('display', 'inline');
+			}
+			if (this.comment_data.commentor_type == 'none') {
+				$('.comment-seller').css('display', 'none');
+			}
+		},
+	};
+</script>
+
+<style scoped>
+	.comment-dp {
+		border-radius: 50%;
+		padding: 0;
+	}
+
+	.comment-name {
+		color: var(--dark-text-color);
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.comment-seller {
+		background-color: rgb(125, 79, 255);
+		color: white;
+		font-size: 14px;
+		font-weight: 600;
+		border-radius: 4px;
+		padding: 1px 4px;
+	}
+
+	.light-txt,
+	.comment-time {
+		color: rgb(173, 173, 173);
+		font-size: 14px;
+		font-weight: 400;
+	}
+
+	.comment-dp,
+	.comment-name,
+	.comment-seller,
+	.comment-time {
+		margin-right: 10px;
+	}
+
+	.comment-txt {
+		font-size: 16px;
+		color: var(--dark-text-color);
+		font-weight: 400;
+		padding-left: 40px;
+	}
+
+	.reply-txt-section {
+		padding-left: 50px;
+	}
+
+	.reply-txt {
+		cursor: pointer;
+	}
+
+	.reply-txt:hover {
+		color: #323232;
+	}
+
+	.reply-to {
+		font-size: 16px;
+		font-weight: 400;
+		color: var(--main-color);
+		display: none;
+	}
+</style>

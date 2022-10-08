@@ -1,0 +1,44 @@
+{
+	"name": "frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
+	},
+	"dependencies": {
+		"@fancyapps/ui": "^4.0.31",
+		"@fortawesome/fontawesome-svg-core": "^6.1.2",
+		"@fortawesome/free-brands-svg-icons": "^6.2.0",
+		"@fortawesome/free-solid-svg-icons": "^6.1.2",
+		"@fortawesome/vue-fontawesome": "^3.0.1",
+		"@vuelidate/core": "^2.0.0-alpha.44",
+		"@vuelidate/validators": "^2.0.0-alpha.31",
+		"axios": "^0.27.2",
+		"bootstrap": "^5.2.0",
+		"core-js": "^3.8.3",
+		"dayjs": "^1.11.5",
+		"jquery": "^3.6.0",
+		"js-cookie": "^2.2.1",
+		"jwt-decode": "^3.1.2",
+		"moment": "^2.29.4",
+		"vue": "^3.2.13",
+		"vue-i18n": "^9.1.10",
+		"vue-router": "^4.0.3",
+		"vue3-click-away": "^1.2.4",
+		"vuelidate": "^0.7.7",
+		"vuex": "^4.0.0",
+		"vuex-persistedstate": "^4.1.0"
+	},
+	"devDependencies": {
+		"@intlify/vue-i18n-loader": "^3.0.0",
+		"@vue/cli-plugin-babel": "~5.0.0",
+		"@vue/cli-plugin-router": "~5.0.0",
+		"@vue/cli-plugin-vuex": "~5.0.0",
+		"@vue/cli-service": "~5.0.0",
+		"sass": "^1.32.7",
+		"sass-loader": "^12.0.0",
+		"vue-cli-plugin-i18n": "~2.3.1"
+	}
+}
