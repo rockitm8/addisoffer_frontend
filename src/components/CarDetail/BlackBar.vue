@@ -198,9 +198,7 @@
 						this.car_data
 					)
 					.then((response) => {})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async changeCarStatus() {
 				let data = {
@@ -214,13 +212,9 @@
 							.then((response) => {
 								location.reload();
 							})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 		},
 		mounted() {

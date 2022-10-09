@@ -37,14 +37,12 @@
 		},
 		methods: {
 			checkComment() {
-				if (this.comment == "")
-				{
+				if (this.comment == '') {
 					return;
 				}
 
-				if (this.$store.state.header == "Header")
-				{
-					alert("Please login to comment!")
+				if (this.$store.state.header == 'Header') {
+					alert('Please login to comment!');
 					return;
 				}
 
@@ -56,18 +54,16 @@
 				};
 				this.$store.dispatch('submitComment', data);
 
-				$("#submit-btn").prop("disabled", "true")
+				$('#submit-btn').prop('disabled', 'true');
 			},
 		},
 		watch: {
 			comment: {
 				handler() {
-					if (this.comment != "")
-					{
-						$(".icon-btn").css("color", "var(--main-color)")
-					}
-					else {
-						$(".icon-btn").css("color", "gray")
+					if (this.comment != '') {
+						$('.icon-btn').css('color', 'var(--main-color)');
+					} else {
+						$('.icon-btn').css('color', 'gray');
 					}
 				},
 			},

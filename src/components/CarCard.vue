@@ -132,13 +132,9 @@
 							.then((response) => {
 								location.reload();
 							})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async fetchCarImage() {
 				await axios
@@ -147,8 +143,7 @@
 					})
 					.then((response) => {
 						this.main_image = response.data;
-					})
-					.catch((err) => console.log(err.message));
+					});
 			},
 		},
 		mounted() {

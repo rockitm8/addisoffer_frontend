@@ -9,7 +9,7 @@
 
 <script>
 	import axiosInstance from '@/js/axiosInstance';
-	
+
 	export default {
 		name: 'SimpleCarCard',
 		props: {
@@ -17,8 +17,8 @@
 		},
 		data() {
 			return {
-				main_image: null
-			}
+				main_image: null,
+			};
 		},
 		methods: {
 			async fetchCarImage() {
@@ -29,12 +29,12 @@
 					.then((response) => {
 						this.main_image = response.data;
 					})
-					.catch((err) => console.log(err.message));
+					.catch((err) => {});
 			},
 		},
 		mounted() {
 			this.fetchCarImage();
-		}
+		},
 	};
 </script>
 

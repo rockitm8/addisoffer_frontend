@@ -17,6 +17,10 @@ const routes = [
 		path: '/',
 		redirect: '/en',
 	},
+	// {
+	// 	path: '/ws',
+	// 	redirect: '/en',
+	// },
 	{
 		path: '/:lang',
 		component: {

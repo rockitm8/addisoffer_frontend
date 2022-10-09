@@ -98,9 +98,7 @@
 							else this.car_rest_image.push(this.car_images[i]);
 						}
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 		},
 		mounted() {

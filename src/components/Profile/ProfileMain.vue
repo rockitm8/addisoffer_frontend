@@ -205,7 +205,7 @@
 	import Line from '../Line.vue';
 	import SimpleCarCard from '../SimpleCarCard.vue';
 	import axiosInstance from '@/js/axiosInstance';
-	import axiosInstanceBearer from '@/js/axiosInstanceBearer'
+	import axiosInstanceBearer from '@/js/axiosInstanceBearer';
 
 	export default {
 		name: 'ProfileMain',
@@ -243,42 +243,30 @@
 				const formData = new FormData();
 				formData.append('profile_pic', file);
 
-				await axiosInstance
-					.patch(
-						`/api/users/image/`,
-						formData
-					)
+				await axiosInstanceBearer
+					.patch(`/api/users/image/`, formData)
 					.then((response) => {
-						console.log('Profile pic uploaded...');
 						$('.wrapper').css('background', file);
 						location.reload(true);
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async fetchUser() {
 				await axiosInstance
 					.get(`/api/users/profile/`)
 					.then((response) => {
-						console.log('User data recieved...', response.data);
 						this.user_data = response.data;
 						this.$store.state.logged_user = this.user_data;
 						this.fetchSettings();
 						this.fetchProfilePic();
 						this.fetchMyList();
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async fetchSettings() {
 				await axiosInstance
-					.get(
-						`/api/users/settings/${this.user_data.id}/`
-					)
+					.get(`/api/users/settings/${this.user_data.id}/`)
 					.then((response) => {
-						console.log('User Settings data recieved...', response.data);
 						for (const i in response.data) {
 							if (response.data[i] == false) this.checkedNotifications[i] = '0';
 							else {
@@ -286,49 +274,38 @@
 							}
 						}
 						this.$store.state.settings = this.checkedNotifications;
-						
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async fetchProfilePic() {
 				await axiosInstanceBearer
 					.get(`/api/users/image/`)
 					.then((response) => {
-						console.log('User Profile Pic recieved...', response.data);
+						if (response.data[0].profile_pic != null) {
+							$('.wrapper').css(
+								'background',
+								`url(${this.$store.state.backend_url}${response.data[0].profile_pic})`
+							);
 
-						$('.wrapper').css(
-							'background',
-							`url(${this.$store.state.backend_url}${response.data[0].profile_pic})`
-						);
+							$('.wrapper').css('background-position', `center`);
 
-						$('.wrapper').css('background-position', `center`);
-
-						$('.wrapper').css('background-size', `cover`);
+							$('.wrapper').css('background-size', `cover`);
+						}
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async fetchMyList() {
 				await axiosInstanceBearer
 					.get(`/api/user-cars/`)
 					.then((response) => {
-						console.log("User's car list recieved...", response.data);
 						this.car_list = response.data;
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 		},
 		mounted() {
-			this.fetchUser();
-
-			if (this.$store.state.header == "Header")
-			{
-				this.user_data = []
+			if (this.$store.state.header == 'Header') {
+				this.user_data = [];
 				this.checkedNotifications = {
 					notification_is_replied: '0',
 					notification_is_new_bid: '0',
@@ -337,9 +314,11 @@
 					email_is_new_bid: '0',
 					email_is_new_comment: '0',
 					email_is_out_bid: '0',
-				}
-				this.file = {}
-				this.car_list = null
+				};
+				this.file = {};
+				this.car_list = null;
+			} else {
+				this.fetchUser();
 			}
 		},
 		components: { Line, SimpleCarCard },

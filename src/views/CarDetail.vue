@@ -39,8 +39,8 @@
 	import CarHeading from '@/components/CarDetail/CarHeading.vue';
 
 	import axiosInstance from '@/js/axiosInstance';
-	import axiosInstanceBearer from '@/js/axiosInstanceBearer'
-	import axios from 'axios'
+	import axiosInstanceBearer from '@/js/axiosInstanceBearer';
+	import axios from 'axios';
 
 	export default {
 		name: 'CarDetail',
@@ -61,9 +61,7 @@
 						this.car_data = response.data;
 						this.$store.state.singleCarData = this.car_data;
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 
 			async fetchBidsLeft() {
@@ -72,9 +70,7 @@
 					.then((response) => {
 						this.$store.state.bids_left = response.data.bids_left;
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 		},
 		watch: {
@@ -93,8 +89,7 @@
 			const body = document.body;
 			body.setAttribute('style', 'overflow: auto');
 			this.fetchCar();
-			if (this.$store.state.header != "Header")
-				this.fetchBidsLeft();
+			if (this.$store.state.header != 'Header') this.fetchBidsLeft();
 		},
 		components: {
 			Gallery,

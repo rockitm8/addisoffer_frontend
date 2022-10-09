@@ -82,7 +82,7 @@ export default createStore({
 		},
 
 		async submitSettings({ commit, state }, data) {
-			await axiosInstanceBearer
+			await axiosInstance
 				.patch(`/api/users/settings/${state.logged_user.id}/`, data)
 				.then((response) => {
 					location.reload();

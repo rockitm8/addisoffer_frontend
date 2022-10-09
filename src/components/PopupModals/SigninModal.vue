@@ -100,7 +100,6 @@
 				this.submitLogin(this.user);
 			},
 			async submitLogin(user) {
-				console.log('Logins submitted...', user);
 				await axios
 					.post(`${this.$store.state.backend_url}/api/users/login/`, user)
 					.then((response) => {
@@ -113,7 +112,6 @@
 						location.reload();
 					})
 					.catch((error) => {
-						console.log('error:', error);
 						this.formError = error.response.data.errors.non_field_errors[0];
 						this.errorTxt = true;
 					});

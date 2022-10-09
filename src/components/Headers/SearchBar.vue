@@ -17,25 +17,21 @@
 	export default {
 		name: 'SearchBar',
 		props: {
-			searchId: String
+			searchId: String,
 		},
 		data() {
 			return {
 				filterarray: [],
-				
 			};
 		},
 		methods: {
 			filterSearch() {
-				console.log(document.getElementById(this.searchId).value);
-				this.$store.state.search_text =
-					document.getElementById(this.searchId).value;
-				console.log(this.$store.state.search_text);
+				this.$store.state.search_text = document.getElementById(
+					this.searchId
+				).value;
 			},
 		},
-		mounted() {
-			
-		},
+		mounted() {},
 	};
 </script>
 

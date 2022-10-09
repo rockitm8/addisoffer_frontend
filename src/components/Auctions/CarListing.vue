@@ -125,7 +125,7 @@
 						}
 						this.$store.commit('listCarData', this.car_list);
 					})
-					.catch((err) => console.log(err.message));
+					.catch((err) => {});
 			},
 
 			updateList(filterConditions) {

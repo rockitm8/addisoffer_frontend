@@ -16,7 +16,7 @@
 					<FormError :formError="formError" :error="errorTxt" />
 				</div>
 
-				<form id="register">
+				<form @submit.prevent="checkForm" id="register">
 					<div class="data">
 						<label class="mb-2" for="username">Username</label>
 						<input v-model="user.user_name" type="text" />
@@ -35,12 +35,7 @@
 						<input v-model="user.password2" type="password" />
 					</div>
 
-					<button
-						@click="checkForm"
-						id="signup-btn"
-						class="form_btn"
-						type="button"
-					>
+					<button id="signup-btn" class="form_btn" type="submit">
 						Sign up
 					</button>
 				</form>
@@ -103,38 +98,37 @@
 					this.user.email == '' ||
 					this.user.password == ''
 				) {
-					this.formError = 'All fields are required!';
 					this.errorTxt = true;
+					this.formError = 'All fields are required!';
 					return;
 				}
 				if (!store.usernameRule.test(this.user.user_name)) {
-					this.formError = 'Username must have at least 2 characters!';
 					this.errorTxt = true;
+					this.formError = 'Username must have at least 2 characters!';
 					return;
 				}
 				if (!store.emailRule.test(this.user.email)) {
-					this.formError = 'Email address is not valid!';
 					this.errorTxt = true;
+					this.formError = 'Email address is not valid!';
 					return;
 				}
 				if (!store.passwordRule.test(this.user.password)) {
+					this.errorTxt = true;
 					this.formError =
 						'Password must contain one capital letter, one small letter, one number and one symbol!';
-					this.errorTxt = true;
 					return;
 				}
 				if (this.user.password != this.user.password2) {
-					this.formError = 'Passwords do not match!';
 					this.errorTxt = true;
+					this.formError = 'Passwords do not match!';
 					return;
 				}
 
-				this.formError = '';
 				this.errorTxt = false;
+				this.formError = '';
 				this.submitRegister(this.user);
 			},
 			async submitRegister(user) {
-				console.log('Registeration submitted...');
 				this.errorTxt = false;
 				this.formError = 'Processing, please wait!';
 
@@ -147,7 +141,6 @@
 						let err = error.response.data.errors;
 						this.errorTxt = true;
 						for (const [key, value] of Object.entries(err)) {
-							console.log('value:', value);
 							this.formError = value[0];
 						}
 					});

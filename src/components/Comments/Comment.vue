@@ -9,7 +9,11 @@
 						alt=""
 					/>
 					<span class="comment-name">{{ comment_data.commentor_name }}</span>
-					<span v-if="comment_data.commentor_type != 'None'" class="comment-seller">{{ comment_data.commentor_type }}</span>
+					<span
+						v-if="comment_data.commentor_type != 'None'"
+						class="comment-seller"
+						>{{ comment_data.commentor_type }}</span
+					>
 					<span class="light-text comment-time">
 						{{ comment_data.published_time }}
 					</span>
@@ -67,9 +71,7 @@
 					.then((response) => {
 						this.reply_to_username = 'Re: ' + response.data.user_name;
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 		},
 		mounted() {

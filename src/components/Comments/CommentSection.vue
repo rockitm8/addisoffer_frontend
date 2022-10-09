@@ -16,7 +16,7 @@
 	import CommentAdd from './CommentAdd.vue';
 	import moment from 'moment';
 	import axiosInstance from '@/js/axiosInstance';
-	import axios from 'axios'
+	import axios from 'axios';
 
 	export default {
 		name: 'CommentSection',
@@ -51,7 +51,7 @@
 						this.comment_list = temp;
 						this.comment_list.reverse();
 					})
-					.catch((err) => console.log(err.message));
+					.catch((err) => {});
 			},
 		},
 		mounted() {

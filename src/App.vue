@@ -2,22 +2,18 @@
 	<div class="">
 		<Renderer />
 		<!-- <SearchBar /> -->
-		<!-- <test /> -->
-		<!-- <FormTest /> -->
 		<!-- <NotificationBell /> -->
 	</div>
 </template>
 
 <script>
 	import Renderer from './views/Renderer.vue';
-	import FormTest from './views/FormTest.vue';
 	import NotificationBell from './components/Headers/NotificationBell.vue';
-	import Test from './views/test.vue';
 	import SearchBar from './components/Headers/SearchBar.vue';
-	import $ from 'jquery'
-	
+	import $ from 'jquery';
+
 	export default {
-		components: { Renderer, FormTest, NotificationBell, Test, SearchBar },
+		components: { Renderer, NotificationBell, SearchBar },
 	};
 </script>
 

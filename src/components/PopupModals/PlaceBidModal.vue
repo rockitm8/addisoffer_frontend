@@ -12,18 +12,13 @@
 					<FormError :formError="formError" :error="errorTxt" />
 				</div>
 
-				<form action="#">
+				<form @submit.prevent="checkBid">
 					<div class="data">
 						<label class="mb-2" for="bid">Your bid</label>
 						<input v-model="bid_amount" type="text" />
 					</div>
 
-					<button
-						id="submit-bid-btn"
-						@click="checkBid"
-						class="form_btn"
-						type="button"
-					>
+					<button id="submit-bid-btn" class="form_btn" type="submit">
 						Submit
 					</button>
 				</form>
@@ -74,29 +69,33 @@
 				let highestBid = this.$store.state.singleCarData.high_bid;
 				this.highest_bid = highestBid;
 				if (this.bid_amount == '') {
-					this.formError = 'Enter an amount.';
 					this.errorTxt = true;
+					this.formError = 'Enter an amount.';
+
 					return;
 				}
 				let bid_amount_num = parseInt(this.bid_amount);
 				if (!store.numberRule.test(this.bid_amount)) {
-					this.formError = 'Amount must be in numbers.';
 					this.errorTxt = true;
+					this.formError = 'Amount must be in numbers.';
+
 					return;
 				}
 				if (bid_amount_num - highestBid < 5000) {
-					this.formError = 'Amount must be more than 5000 of the highest bid.';
 					this.errorTxt = true;
+					this.formError = 'Amount must be more than 5000 of the highest bid.';
+
 					return;
 				}
 				if (bid_amount_num > 1000000000) {
-					this.formError = 'Amount can not be that high.';
 					this.errorTxt = true;
+					this.formError = 'Amount can not be that high.';
+
 					return;
 				}
 
-				this.formError = '';
 				this.errorTxt = false;
+				this.formError = '';
 
 				let data = {
 					bid_amount: this.bid_amount,
@@ -124,9 +123,7 @@
 					.then((response) => {
 						this.$store.state.singleCarData = response.data;
 					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.catch((error) => {});
 			},
 			async submitBid() {
 				let data = {
@@ -151,18 +148,14 @@
 								this.$store.state.singleCarData
 							)
 							.then((response) => {})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 						axiosInstance
 							.patch(
 								`/api/users/update/${this.$store.state.logged_user.id}/`,
 								updatedUser
 							)
 							.then((response) => {})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 						let commentData = {
 							reply_to: null,
 							comment: 'Bid: ETB ' + this.bid_amount,
@@ -178,20 +171,15 @@
 						axiosInstance
 							.post('api/users/email-is-new-bid/', data)
 							.then((response) => {})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 						axiosInstance
 							.post('api/users/email-is-out-bid/', data)
 							.then((response) => {
 								this.$store.dispatch('submitComment', commentData);
 							})
-							.catch((error) => {
-								console.log('error:', error);
-							});
+							.catch((error) => {});
 					})
 					.catch((error) => {
-						console.log('error:', error);
 						this.errorTxt = true;
 						this.formError = "Sellers can't bid on their cars.";
 					});

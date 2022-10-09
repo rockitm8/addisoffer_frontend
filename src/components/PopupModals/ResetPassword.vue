@@ -4,7 +4,7 @@
 			<FormError :formError="formError" :error="errorTxt" />
 		</div>
 
-		<form action="#">
+		<form @submit.prevent="checkForm">
 			<div class="data">
 				<label class="mb-2" for="password">New Password</label>
 				<input v-model="password" type="text" />
@@ -15,7 +15,7 @@
 				<input v-model="password2" type="text" />
 			</div>
 
-			<button @click="checkForm" class="form_btn" type="button">Submit</button>
+			<button class="form_btn" type="submit">Submit</button>
 		</form>
 	</div>
 </template>
@@ -56,39 +56,36 @@
 				let store = this.$store.state.rules;
 
 				if (this.password == '' || this.password2 == '') {
-					this.formError = 'All fields are required!';
 					this.errorTxt = true;
+					this.formError = 'All fields are required!';
+
 					return;
 				}
 
 				if (this.password != this.password2) {
-					this.formError = 'Passwords do not match!';
 					this.errorTxt = true;
+					this.formError = 'Passwords do not match!';
+
 					return;
 				}
 
-				this.formError = '';
 				this.errorTxt = false;
+				this.formError = '';
+
 				this.submitPasswords();
 			},
 			async submitPasswords() {
-				console.log('Password submitted...');
 				let data = {
 					password: this.password,
 					password2: this.password2,
 				};
-				console.log(data);
 				await axios
 					.post(
 						`${this.$store.state.backend_url}/api/users/changepassword/`,
 						data
 					)
-					.then((response) => {
-						console.log('response:', response);
-					})
-					.catch((error) => {
-						console.log('error:', error);
-					});
+					.then((response) => {})
+					.catch((error) => {});
 			},
 		},
 		watch: {

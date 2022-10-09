@@ -6,11 +6,18 @@
 			icon="fa-solid fa-bell"
 		/>
 		<div class="dropdown">
-			<div  v-if=" Object.keys($store.state.notifications).length !== 0" class="notify_item" v-for="(item, i) in $store.state.notifications" :key="i">
+			<div
+				v-if="Object.keys($store.state.notifications).length !== 0"
+				class="notify_item"
+				v-for="(item, i) in $store.state.notifications"
+				:key="i"
+			>
 				<NotificationInfo :notification="item" />
 			</div>
 			<div v-else>
-				<div class="empty">No notifications yet. Check your profile settings.</div>
+				<div class="empty">
+					No notifications yet. Check your profile settings.
+				</div>
 			</div>
 		</div>
 	</div>
@@ -23,51 +30,47 @@
 	import moment from 'moment';
 
 	export default {
-    name: "NotficationBell",
-    data() {
-        return {
-            notifications: null
-        };
-    },
-    methods: {
-        toggleNotification() {
-            $(".dropdown").toggleClass("active");
-        },
-        countdownTimer() {
-            const intervalId = setTimeout(() => {
-                this.fetchNotifications();
-				console.log(this.$store.state.notifications)
-                this.countdownTimer();
-            }, 2000);
-            return intervalId;
-        },
-        startTime() {
-            this.intervalId = this.countdownTimer();
-        },
-        async fetchNotifications() {
-            await axiosInstanceBearer.get("/api/users/notifications/")
-                .then((response) => {
-
-				let temp = response.data;
-				for (const notification in temp) {
-					temp[notification].notified_time = moment(
-						temp[notification].notified_time
-					).fromNow();
-				}
-				temp.reverse();
-                this.$store.state.notifications = temp;
-            })
-                .catch((error) => {
-                console.log("error:", error);
-            });
-        }
-    },
-    mounted() {
-        // if (this.$store.state.header === "HeaderAfter")
-        //     this.startTime();
-    },
-    components: { NotificationInfo }
-};
+		name: 'NotficationBell',
+		data() {
+			return {
+				notifications: null,
+			};
+		},
+		methods: {
+			toggleNotification() {
+				$('.dropdown').toggleClass('active');
+			},
+			countdownTimer() {
+				const intervalId = setTimeout(() => {
+					this.fetchNotifications();
+					this.countdownTimer();
+				}, 10000);
+				return intervalId;
+			},
+			startTime() {
+				this.intervalId = this.countdownTimer();
+			},
+			async fetchNotifications() {
+				await axiosInstanceBearer
+					.get('/api/users/notifications/')
+					.then((response) => {
+						let temp = response.data;
+						for (const notification in temp) {
+							temp[notification].notified_time = moment(
+								temp[notification].notified_time
+							).fromNow();
+						}
+						temp.reverse();
+						this.$store.state.notifications = temp;
+					})
+					.catch((error) => {});
+			},
+		},
+		mounted() {
+			if (this.$store.state.header === 'HeaderAfter') this.startTime();
+		},
+		components: { NotificationInfo },
+	};
 </script>
 
 <style scoped>
@@ -94,7 +97,6 @@
 		position: absolute;
 		display: none;
 		right: 2%;
-		
 	}
 
 	.empty {
@@ -107,7 +109,6 @@
 		align-items: center;
 		padding: 10px 0;
 		border-bottom: 1px solid #dbdaff;
-		
 	}
 
 	.dropdown .notify_item:last-child {

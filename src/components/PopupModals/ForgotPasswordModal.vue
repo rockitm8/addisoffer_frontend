@@ -13,20 +13,13 @@
 					<FormError :formError="formError" :error="errorTxt" />
 				</div>
 
-				<form action="#">
+				<form @submit.prevent="checkEmail">
 					<div class="data">
 						<label class="mb-2" for="Email address">Email address</label>
 						<input v-model="email" type="text" />
 					</div>
 
-					<button
-						@click="checkEmail"
-						id="forgot-btn"
-						class="form_btn"
-						type="button"
-					>
-						Submit
-					</button>
+					<button id="forgot-btn" class="form_btn" type="submit">Submit</button>
 				</form>
 			</div>
 		</div>
@@ -72,12 +65,14 @@
 				let store = this.$store.state.rules;
 
 				if (!store.emailRule.test(this.email)) {
-					this.formError = 'Email address is not valid!';
 					this.errorTxt = true;
+					this.formError = 'Email address is not valid!';
+
 					return;
 				}
-				this.formError = '';
 				this.errorTxt = false;
+				this.formError = '';
+
 				this.submitEmail(this.email);
 			},
 			async submitEmail(emailadd) {
@@ -85,19 +80,21 @@
 					email: emailadd,
 				};
 				$('#forgot-btn').prop('disabled', 'true');
+				this.errorTxt = false;
+				this.formError = 'Processing, please wait!';
 				await axios
 					.post(
 						`${this.$store.state.backend_url}/api/users/send-reset-password-email/`,
 						data
 					)
 					.then((response) => {
-						this.formError = 'Check your email!';
 						this.errorTxt = false;
+						this.formError = 'Please check your email!';
 					})
 					.catch((error) => {
-						console.log('error:', error.response.data);
-						this.formError = 'Not a registered User!';
 						this.errorTxt = true;
+						this.formError = 'Not a registered User!';
+
 						$('#forgot-btn').prop('disabled', 'false');
 					});
 			},

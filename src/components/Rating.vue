@@ -8,11 +8,11 @@
 				<h6>Why Addis Offer?</h6>
 				<div class="row">
 					<div class="col-6">
-						<span class="rating-value">{{auctions_completed}}</span> <br />
+						<span class="rating-value">{{ auctions_completed }}</span> <br />
 						<span class="rating-heading">Auctions completed</span>
 					</div>
 					<div class="col-6">
-						<span class="rating-value">ETB {{value_cars_sold}}</span> <br />
+						<span class="rating-value">ETB {{ value_cars_sold }}</span> <br />
 						<span class="rating-heading">Value of cars sold</span>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 						<span class="rating-heading">Sell-through rate</span>
 					</div> -->
 					<div class="col-6">
-						<span class="rating-value">{{registered_members}}</span> <br />
+						<span class="rating-value">{{ registered_members }}</span> <br />
 						<span class="rating-heading">Registered members</span>
 					</div>
 				</div>
@@ -48,37 +48,37 @@
 </template>
 
 <script>
-	import Line from "./Line.vue";
+	import Line from './Line.vue';
 	import axiosInstance from '@/js/axiosInstance';
-	import axios from 'axios'
+	import axios from 'axios';
 
 	export default {
-		name: "Rating",
+		name: 'Rating',
 		data() {
 			return {
 				auctions_completed: null,
 				value_cars_sold: null,
-				registered_members: null
-			}
+				registered_members: null,
+			};
 		},
 		methods: {
 			async fetchCarStats() {
-				await axios.get(`${this.$store.state.backend_url}/api/auctions-completed/`).then((response) => {
-						this.auctions_completed = response.data.auctions_completed
-						this.value_cars_sold = response.data.value_cars_sold
+				await axios
+					.get(`${this.$store.state.backend_url}/api/auctions-completed/`)
+					.then((response) => {
+						this.auctions_completed = response.data.auctions_completed;
+						this.value_cars_sold = response.data.value_cars_sold;
 					})
-					.catch((error) => {
-						console.log("error:", error)
-					});
+					.catch((error) => {});
 			},
 			async fetchRegisteredMembers() {
-				await axios.get(`${this.$store.state.backend_url}/api/users/registered-members/`).then((response) => {
-						this.registered_members = response.data
+				await axios
+					.get(`${this.$store.state.backend_url}/api/users/registered-members/`)
+					.then((response) => {
+						this.registered_members = response.data;
 					})
-					.catch((error) => {
-						console.log("error:", error)
-					});
-			}
+					.catch((error) => {});
+			},
 		},
 		mounted() {
 			this.fetchCarStats();

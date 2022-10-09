@@ -11,15 +11,13 @@
 					<FormError :formError="formError" :error="errorTxt" />
 				</div>
 
-				<form action="#">
+				<form @submit.prevent="checkOtp">
 					<div class="data">
 						<label class="mb-2" for="otp">Enter your OTP</label>
 						<input v-model="otp" type="password" />
 					</div>
 
-					<button @click="checkOtp" class="form_btn" type="button">
-						Submit
-					</button>
+					<button class="form_btn" type="submit">Submit</button>
 				</form>
 			</div>
 		</div>
@@ -62,17 +60,18 @@
 				let store = this.$store.state.rules;
 
 				if (this.otp == '') {
-					this.formError = 'Enter an OTP';
 					this.errorTxt = true;
+					this.formError = 'Enter an OTP';
+
 					return;
 				}
 
-				this.formError = '';
 				this.errorTxt = false;
+				this.formError = '';
+
 				this.submitOtp();
 			},
 			async submitOtp() {
-				console.log('Otp submitted...');
 				let data = {
 					otp: this.otp,
 				};
@@ -83,12 +82,10 @@
 						data
 					)
 					.then((response) => {
-						console.log('response:', response);
+						this.errorTxt = false;
 						this.formError = 'Registeration Successful!';
 					})
-					.catch((error) => {
-						console.log('error:', error.response.data);
-					});
+					.catch((error) => {});
 			},
 		},
 		watch: {
