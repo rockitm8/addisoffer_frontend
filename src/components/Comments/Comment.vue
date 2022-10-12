@@ -87,13 +87,10 @@
 					.catch((error) => {});
 			},
 			async fetchProfilePic() {
-				let data = {
-					user_id: this.comment_data.commentor,
-				};
 				await axios
 					.get(
 						`${this.$store.state.backend_url}/api/users/profile_pic/${this.comment_data.commentor}/`,
-						data
+						{ params: { user_id: this.comment_data.commentor } }
 					)
 					.then((response) => {
 						console.log('HEHEWHHRJREJGER:', response.data);
