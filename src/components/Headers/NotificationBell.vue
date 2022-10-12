@@ -28,6 +28,7 @@
 	import axiosInstanceBearer from '@/js/axiosInstanceBearer';
 	import NotificationInfo from './NotificationInfo.vue';
 	import moment from 'moment';
+	import axiosInstance from '@/js/axiosInstance';
 
 	export default {
 		name: 'NotficationBell',
