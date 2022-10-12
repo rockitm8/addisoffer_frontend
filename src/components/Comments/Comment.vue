@@ -93,10 +93,8 @@
 						{ params: { user_id: this.comment_data.commentor } }
 					)
 					.then((response) => {
-						console.log('HEHEWHHRJREJGER:', response.data);
-						if (response.data.profile_pic != null) {
-							this.profile_pic =
-								this.$store.state.backend_url + response.data.profile_pic;
+						if (response.data != null) {
+							this.profile_pic = response.data;
 						} else {
 							this.profile_pic = null;
 						}
