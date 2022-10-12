@@ -111,7 +111,6 @@
 						);
 						this.$store.commit('loginSuccess', response.data.token.access);
 						this.$store.commit('toggleHeader');
-						location.reload();
 					})
 					.catch((error) => {
 						this.formError = error.response.data.errors.non_field_errors[0];
