@@ -3,22 +3,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="comment-heading col-12">
-					<div v-if="profile_pic != null">
-						<img
-							id="profile-pic"
-							class="comment-dp img"
-							:src="profile_pic"
-							alt=""
-						/>
-					</div>
-					<div v-else>
-						<img
-							id="profile-pic"
-							class="comment-dp img"
-							src="../../assets/profile-pic-initial.png"
-							alt=""
-						/>
-					</div>
+					<img
+						id="profile-pic"
+						class="comment-dp img"
+						:src="profile_pic"
+						alt=""
+					/>
 
 					<span class="comment-name">{{ comment_data.commentor_name }}</span>
 					<span
@@ -64,7 +54,7 @@
 		data() {
 			return {
 				reply_to_username: '',
-				profile_pic: null,
+				profile_pic: '../../assets/profile-pic-initial.png',
 			};
 		},
 		methods: {
@@ -97,13 +87,12 @@
 					})
 					.then((response) => {
 						if (response.data[0].profile_pic != null) {
-							// $('#profile-pic').attr(
-							// 	'src',
-							// 	`${this.$store.state.backend_url}${response.data[0].profile_pic}`
-							// );
 							this.profile_pic =
 								this.$store.state.backend_url + response.data[0].profile_pic;
+						} else {
+							this.profile_pic = '../../assets/profile-pic-initial.png';
 						}
+						console.log(this.profile_pic);
 					})
 					.catch((error) => {});
 			},
