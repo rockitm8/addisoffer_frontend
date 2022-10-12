@@ -104,9 +104,10 @@
 			},
 		},
 		mounted() {
+			this.fetchProfilePic();
 			if (this.comment_data.reply_to != null) {
 				this.fetchUsername();
-				this.fetchProfilePic();
+
 				$('.reply-to').css('display', 'inline');
 
 				if (this.comment_data.commentor_type == 'seller') {
