@@ -102,9 +102,7 @@
 							// 	`${this.$store.state.backend_url}${response.data[0].profile_pic}`
 							// );
 							this.profile_pic =
-								this.$store.state.backend_url +
-								'/' +
-								response.data[0].profile_pic;
+								this.$store.state.backend_url + response.data[0].profile_pic;
 						}
 					})
 					.catch((error) => {});
