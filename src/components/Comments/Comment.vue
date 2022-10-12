@@ -88,7 +88,6 @@
 						}
 					)
 					.then((response) => {
-						console.log('here');
 						if (response.data[0].profile_pic != null) {
 							this.profile_pic =
 								this.$store.state.backend_url + response.data[0].profile_pic;
