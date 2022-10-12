@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="comment-heading col-12">
-					<div v-if="profile_pic == null">
+					<div v-if="profile_pic == null" class="if-else">
 						<img
 							id="profile-pic"
 							class="comment-dp img"
@@ -11,7 +11,7 @@
 							alt=""
 						/>
 					</div>
-					<div v-else>
+					<div v-else class="if-else">
 						<img
 							id="profile-pic"
 							class="comment-dp img"
@@ -123,7 +123,7 @@
 </script>
 
 <style scoped>
-	.comment-heading {
+	.if-else {
 		display: inline;
 	}
 	.comment-dp {
