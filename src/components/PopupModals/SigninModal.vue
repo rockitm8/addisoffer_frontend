@@ -89,13 +89,12 @@
 					return;
 				}
 
+				this.user.email = this.user.email.toLowerCase();
 				if (!store.emailRule.test(this.user.email)) {
 					this.errorTxt = true;
 					this.formError = 'Email address is not valid!';
 					return;
 				}
-
-				this.user.email = this.user.email.toLowerCase();
 
 				this.formError = '';
 				this.errorTxt = false;

@@ -102,6 +102,7 @@
 					this.formError = 'All fields are required!';
 					return;
 				}
+				this.user.email = this.user.email.toLowerCase();
 				if (!store.usernameRule.test(this.user.user_name)) {
 					this.errorTxt = true;
 					this.formError = 'Username must have at least 2 characters!';
@@ -123,8 +124,6 @@
 					this.formError = 'Passwords do not match!';
 					return;
 				}
-
-				this.user.email = this.user.email.toLowerCase();
 
 				this.errorTxt = false;
 				this.formError = '';
