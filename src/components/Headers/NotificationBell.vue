@@ -52,7 +52,7 @@
 				this.intervalId = this.countdownTimer();
 			},
 			async fetchNotifications() {
-				await axiosInstance
+				await axiosInstanceBearer
 					.get('/api/users/notifications/')
 					.then((response) => {
 						let temp = response.data;

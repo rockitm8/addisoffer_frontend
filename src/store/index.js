@@ -36,8 +36,6 @@ export default createStore({
 			} else {
 				state.header = 'Header';
 			}
-			// location.reload();
-			router.push({ name: 'auctions' });
 		},
 		loginSuccess(state, accessToken) {
 			state.accessToken = accessToken;
@@ -49,6 +47,7 @@ export default createStore({
 			state.settings = {};
 			window.localStorage.clear();
 			router.push({ name: 'auctions' });
+			location.reload();
 		},
 		registerSuccess(state) {},
 		listCarData(state, carList) {

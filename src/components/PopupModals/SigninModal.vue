@@ -43,6 +43,7 @@
 	import FormError from '../FormError.vue';
 	import axiosInstance from '@/js/axiosInstance';
 	import axios from 'axios';
+	import router from '../../router';
 
 	export default {
 		name: 'SigninModal',
@@ -110,6 +111,8 @@
 						);
 						this.$store.commit('loginSuccess', response.data.token.access);
 						this.$store.commit('toggleHeader');
+						router.push({ name: 'auctions' });
+						location.reload();
 					})
 					.catch((error) => {
 						this.formError = error.response.data.errors.non_field_errors[0];
