@@ -83,14 +83,13 @@
 					)
 					.then((response) => {
 						this.reply_to_username = 'Re: ' + response.data.user_name;
-						this.fetchProfilePic();
 					})
 					.catch((error) => {});
 			},
 			async fetchProfilePic() {
 				await axios
 					.get(
-						`${this.$store.state.backend_url}/api/users/image/${this.user_data.id}/`
+						`${this.$store.state.backend_url}/api/users/image/${this.comment_data.commentor}/`
 					)
 					.then((response) => {
 						console.log('HEHEWHHRJREJGER:', response.data);
@@ -107,7 +106,7 @@
 		mounted() {
 			if (this.comment_data.reply_to != null) {
 				this.fetchUsername();
-
+				this.fetchProfilePic();
 				$('.reply-to').css('display', 'inline');
 
 				if (this.comment_data.commentor_type == 'seller') {
