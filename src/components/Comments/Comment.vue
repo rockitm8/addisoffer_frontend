@@ -87,17 +87,12 @@
 					.catch((error) => {});
 			},
 			async fetchProfilePic() {
-				let headers = {
-					Authorization: 'Bearer ' + this.$store.state.accessToken,
-				};
 				await axios
 					.get(
-						`${this.$store.state.backend_url}/api/users/image/${this.user_data.id}/`,
-						{
-							headers: headers,
-						}
+						`${this.$store.state.backend_url}/api/users/image/${this.user_data.id}/`
 					)
 					.then((response) => {
+						console.log('HEHEWHHRJREJGER:', response.data);
 						if (response.data.profile_pic != null) {
 							this.profile_pic =
 								this.$store.state.backend_url + response.data.profile_pic;
