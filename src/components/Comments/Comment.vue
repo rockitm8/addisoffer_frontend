@@ -108,15 +108,14 @@
 				this.fetchUsername();
 
 				$('.reply-to').css('display', 'inline');
-
-				if (this.comment_data.commentor_type == 'seller') {
-					$('.comment-seller').css('background-color', '#f7941d');
-				} else {
-					$('.comment-seller').css('background-color', 'rgb(125, 79, 255)');
-				}
 			}
+
 			if (this.comment_data.commentor_type == 'none') {
 				$('.comment-seller').css('display', 'none');
+			} else if (this.comment_data.commentor_type == 'seller') {
+				$('.comment-seller').css('background-color', '#f7941d');
+			} else {
+				$('.comment-seller').css('background-color', 'rgb(125, 79, 255)');
 			}
 		},
 	};
