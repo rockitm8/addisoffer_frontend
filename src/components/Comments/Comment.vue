@@ -3,12 +3,23 @@
 		<div class="container">
 			<div class="row">
 				<div class="comment-heading col-12">
-					<img
-						id="profile-pic"
-						class="comment-dp img"
-						src="../../assets/profile-pic-initial.png"
-						alt=""
-					/>
+					<div v-if="profile_pic != null">
+						<img
+							id="profile-pic"
+							class="comment-dp img"
+							:src="profile_pic"
+							alt=""
+						/>
+					</div>
+					<div v-else>
+						<img
+							id="profile-pic"
+							class="comment-dp img"
+							src="../../assets/profile-pic-initial.png"
+							alt=""
+						/>
+					</div>
+
 					<span class="comment-name">{{ comment_data.commentor_name }}</span>
 					<span
 						v-if="comment_data.commentor_type != 'None'"
@@ -53,6 +64,7 @@
 		data() {
 			return {
 				reply_to_username: '',
+				profile_pic: null,
 			};
 		},
 		methods: {
@@ -85,10 +97,14 @@
 					})
 					.then((response) => {
 						if (response.data[0].profile_pic != null) {
-							$('#profile-pic').attr(
-								'src',
-								`${this.$store.state.backend_url}${response.data[0].profile_pic}`
-							);
+							// $('#profile-pic').attr(
+							// 	'src',
+							// 	`${this.$store.state.backend_url}${response.data[0].profile_pic}`
+							// );
+							this.profile_pic =
+								this.$store.state.backend_url +
+								'/' +
+								response.data[0].profile_pic;
 						}
 					})
 					.catch((error) => {});
@@ -116,7 +132,7 @@
 	.comment-dp {
 		border-radius: 50%;
 		padding: 0;
-		width: 70px;
+		width: 50px;
 		height: auto;
 	}
 
