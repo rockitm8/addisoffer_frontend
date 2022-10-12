@@ -87,6 +87,10 @@
 					.catch((error) => {});
 			},
 			async fetchProfilePic() {
+				console.log(
+					'this.comment_data.commentor:',
+					this.comment_data.commentor
+				);
 				await axios
 					.get(
 						`${this.$store.state.backend_url}/api/users/image/${this.comment_data.commentor}/`
