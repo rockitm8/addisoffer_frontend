@@ -123,12 +123,14 @@
 </script>
 
 <style scoped>
+	.comment-heading {
+		display: inline;
+	}
 	.comment-dp {
 		border-radius: 50%;
 		padding: 0;
 		width: 50px;
 		height: 50px;
-		display: inline;
 	}
 
 	.comment-name {
