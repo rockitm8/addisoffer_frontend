@@ -81,17 +81,20 @@
 					Authorization: 'Bearer ' + this.$store.state.accessToken,
 				};
 				await axios
-					.get(`${this.$store.state.backend_url}/api/users/image/`, {
-						headers: headers,
-					})
+					.get(
+						`${this.$store.state.backend_url}/api/users/image/${this.user_data.id}/`,
+						{
+							headers: headers,
+						}
+					)
 					.then((response) => {
+						console.log('here');
 						if (response.data[0].profile_pic != null) {
 							this.profile_pic =
 								this.$store.state.backend_url + response.data[0].profile_pic;
 						} else {
 							this.profile_pic = '../../assets/profile-pic-initial.png';
 						}
-						console.log(this.profile_pic);
 					})
 					.catch((error) => {});
 			},

@@ -279,7 +279,7 @@
 			},
 			async fetchProfilePic() {
 				await axiosInstanceBearer
-					.get(`/api/users/image/`)
+					.get(`/api/users/image/${this.user_data.id}/`)
 					.then((response) => {
 						if (response.data[0].profile_pic != null) {
 							$('.wrapper').css(
