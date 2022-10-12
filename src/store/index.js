@@ -36,7 +36,8 @@ export default createStore({
 			} else {
 				state.header = 'Header';
 			}
-			location.reload();
+			// location.reload();
+			router.push({ name: 'auctions' });
 		},
 		loginSuccess(state, accessToken) {
 			state.accessToken = accessToken;

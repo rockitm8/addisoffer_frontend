@@ -124,6 +124,8 @@
 					return;
 				}
 
+				this.user.email = this.user.email.toLowerCase();
+
 				this.errorTxt = false;
 				this.formError = '';
 				this.submitRegister(this.user);

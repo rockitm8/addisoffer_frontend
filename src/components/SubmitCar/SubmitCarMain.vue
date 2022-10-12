@@ -249,15 +249,11 @@
 									name="start-year"
 								>
 									<option value="Brand New">Brand New</option>
-									<option value="Used Like New (&lt; 20000Kms)">
+									<option value="Used Like New">
 										Used Like New (&lt; 20000Kms)
 									</option>
-									<option value="Used Good 20,001-100,000KMs">
-										Used Good 20,001-100,000KMs
-									</option>
-									<option value="Used ( > 100,001KMs)">
-										Used ( > 100,001KMs)
-									</option>
+									<option value="Used Good">Used Good 20,001-100,000KMs</option>
+									<option value="Used">Used ( > 100,001KMs)</option>
 									<option value="Needs repair">Needs repair</option>
 									<option value="Totaled">Totaled</option>
 								</select>
@@ -419,6 +415,12 @@
 				<div class="box">
 					<div class="content3">
 						<h2>PHOTOS</h2>
+						<p>
+							The cars uploaded should be in an arrangements of exterior,
+							interior, engine, underneath the car, flaws you may consider
+							should be seen, documentation and any other photos you may want to
+							include.
+						</p>
 						<div class="">
 							<form enctype="multipart/form-data">
 								<input
@@ -508,11 +510,7 @@
 				const formData = new FormData();
 				$('#top')[0].scrollIntoView();
 
-
-
-
-				if (this.$store.state.header =="Header")
-				{
+				if (this.$store.state.header == 'Header') {
 					this.formError = '* You must login to continue!';
 					this.errorTxt = true;
 					return;
@@ -525,7 +523,7 @@
 						return;
 					}
 				}
-				
+
 				if (!storeRules.numberRule.test(this.car.phone_number)) {
 					this.formError = '* Phone Number must contain numbers only!';
 					this.errorTxt = true;
@@ -549,8 +547,25 @@
 					this.errorTxt = true;
 					return;
 				}
+				if (parseInt(this.car.bid_days) < 5) {
+					this.formError =
+						'* You must allow the bidding days for atleast 5 days';
+					this.errorTxt = true;
+					return;
+				}
+				if (parseInt(this.car.bid_days) > 15) {
+					this.formError =
+						'* You must allow the bidding days for atmost 15 days';
+					this.errorTxt = true;
+					return;
+				}
 				if (this.car.image.length < 10) {
 					this.formError = '* You must upload atleast 10 images';
+					this.errorTxt = true;
+					return;
+				}
+				if (this.car.image.length > 20) {
+					this.formError = '* You must upload atmost 20 images';
 					this.errorTxt = true;
 					return;
 				}
@@ -638,7 +653,6 @@
 
 <style scoped>
 	/* sec 1 */
-
 	.content-box {
 		font-family: 'segoe ui';
 		margin: auto;

@@ -21,7 +21,14 @@
 							</li>
 						</div>
 						<div v-else>
-							<span class="sold-txt">Sold for ETB {{ car_data.high_bid }}</span>
+							<div v-if="car_data.high_bid > car_data.reserve_bid">
+								<span class="sold-txt"
+									>Sold for ETB {{ car_data.high_bid }}</span
+								>
+							</div>
+							<div v-else>
+								<span class="sold-txt">Bid to ETB {{ car_data.high_bid }}</span>
+							</div>
 						</div>
 					</ul>
 				</div>
@@ -111,6 +118,12 @@
 							splitTime[2] = '0' + splitTime[2];
 						}
 						this.displayTime = splitTime.join(':');
+
+						if (carTime.diff(nowTime, 'hours') < 1) {
+							$('.bid-stats').css('background-color', 'rgb(241, 81, 73)');
+						} else {
+							$('.bid-stats').css('background-color', 'rgb(38, 38, 38)');
+						}
 					} else if (carTime.diff(nowTime, 'days') == 1) {
 						this.displayTime = '1 day';
 					} else {

@@ -31,29 +31,19 @@
 			<div class="col-xl-3 col-lg-4 col-md-5 col-12 px-md-4 px-0">
 				<div class="rating-txt">
 					<div class="rating-tags pb-4">
-						<div class="rate">7,000+</div>
+						<div class="rate">{{ auctions_completed }}</div>
 						<div class="rate-p pt-3">Auctions completed</div>
 					</div>
 					<div class="rating-tags pb-4">
-						<div class="rate">$130M+</div>
+						<div class="rate">ETB {{ value_cars_sold }}</div>
 						<div class="rate-p pt-3">Value of cars sold</div>
-					</div>
-					<div class="rating-tags">
-						<div class="rate">9 out of 10</div>
-						<div class="rate-p pt-3">
-							Sellers strongly recommend Cars & Bids
-						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-xl-3 col-lg-4 col-md-5 col-12">
 				<div class="rating-txt">
 					<div class="rating-tags pb-4">
-						<div class="rate">85%+</div>
-						<div class="rate-p pt-3">Sell-through rate</div>
-					</div>
-					<div class="rating-tags pb-4">
-						<div class="rate">240k+</div>
+						<div class="rate">{{ registered_members }}</div>
 						<div class="rate-p pt-3">Registered members</div>
 					</div>
 					<div class="rating-tags">
@@ -128,14 +118,43 @@
 
 <script>
 	import $ from 'jquery';
+	import axios from 'axios';
 
 	export default {
 		name: 'SellCarMain',
+		data() {
+			return {
+				auctions_completed: null,
+				value_cars_sold: null,
+				registered_members: null,
+			};
+		},
 		methods: {
 			checkSignin() {
 				if (this.$store.state.header == 'header') {
 				}
 			},
+			async fetchCarStats() {
+				await axios
+					.get(`${this.$store.state.backend_url}/api/auctions-completed/`)
+					.then((response) => {
+						this.auctions_completed = response.data.auctions_completed;
+						this.value_cars_sold = response.data.value_cars_sold;
+					})
+					.catch((error) => {});
+			},
+			async fetchRegisteredMembers() {
+				await axios
+					.get(`${this.$store.state.backend_url}/api/users/registered-members/`)
+					.then((response) => {
+						this.registered_members = response.data;
+					})
+					.catch((error) => {});
+			},
+		},
+		mounted() {
+			this.fetchCarStats();
+			this.fetchRegisteredMembers();
 		},
 	};
 </script>
@@ -308,6 +327,7 @@
 	/* our aucations */
 
 	.auctions-row {
+		padding-top: 80px;
 		padding-bottom: 80px;
 	}
 

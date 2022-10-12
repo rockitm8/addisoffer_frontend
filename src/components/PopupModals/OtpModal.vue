@@ -14,7 +14,7 @@
 				<form @submit.prevent="checkOtp">
 					<div class="data">
 						<label class="mb-2" for="otp">Enter your OTP</label>
-						<input v-model="otp" type="password" />
+						<input v-model="otp" type="text" />
 					</div>
 
 					<button class="form_btn" type="submit">Submit</button>
@@ -28,6 +28,7 @@
 	import FormError from '../FormError.vue';
 	import axiosInstance from '@/js/axiosInstance';
 	import axios from 'axios';
+	import router from '../../router';
 
 	export default {
 		name: 'ForgotPasswordModal',
@@ -84,6 +85,7 @@
 					.then((response) => {
 						this.errorTxt = false;
 						this.formError = 'Registeration Successful!';
+						router.push({ name: 'auctions' });
 					})
 					.catch((error) => {});
 			},

@@ -95,6 +95,8 @@
 					return;
 				}
 
+				this.user.email = this.user.email.toLowerCase();
+
 				this.formError = '';
 				this.errorTxt = false;
 				this.submitLogin(this.user);

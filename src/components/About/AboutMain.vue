@@ -72,7 +72,8 @@
 				<p>
 					Even though we make the process of buying and selling cars easy, we
 					highly recommend buyers do their due diligence thoroughly before they
-					place bids. This is your responsibility; we will not be asked for it.
+					place bids. This is fully the buyer's responsibility; we will not be
+					asked for it.
 				</p>
 				<p>Review the car deeply.</p>
 				<p>Ask the seller for any information you may need</p>
@@ -111,7 +112,7 @@
 						price.
 					</li>
 					<li>
-						ii. If the auction is a
+						If the auction is a
 						<span class="orange-txt">NO RESERVE PRICE</span>, the highest bidder
 						will be the winner of the auction regardless of the amount you bid.
 					</li>
@@ -125,12 +126,12 @@
 					Using the form, we have provided give us a piece of detailed
 					information about your car. You have to decide whether you want a
 					reserve price or not. Keep in mind that all of our auctions start from
-					$0, regardless of whether or not they have a reserve.
+					ETB 0, regardless of whether or not they have a reserve.
 				</p>
 				<h5>2. We will review your form</h5>
 				<p>
-					All the information you provided us will be reviewed by our team and
-					we will proceed to the payment.
+					All the information you provided to us will be reviewed by our team
+					and we will proceed to the payment.
 				</p>
 				<p>
 					We will be providing you with a payment option and bank account as
@@ -237,6 +238,7 @@
 
 	.orange-txt {
 		color: var(--main-color);
+		font-weight: 700;
 	}
 
 	.sec-2 h1 {

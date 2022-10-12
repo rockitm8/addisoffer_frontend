@@ -42,9 +42,16 @@
 							</div>
 							<div v-else>
 								<li>
-									<span class="sold-txt"
-										>Bid to ETB {{ car_data.high_bid }}</span
-									>
+									<div v-if="car_data.high_bid > car_data.reserve_bid">
+										<span class="sold-txt"
+											>Sold for ETB {{ car_data.high_bid }}</span
+										>
+									</div>
+									<div v-else>
+										<span class="sold-txt"
+											>Bid to ETB {{ car_data.high_bid }}</span
+										>
+									</div>
 								</li>
 								<div class="right-icons">
 									<li class="bids">

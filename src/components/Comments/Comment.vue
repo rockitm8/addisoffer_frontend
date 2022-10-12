@@ -4,8 +4,9 @@
 			<div class="row">
 				<div class="comment-heading col-12">
 					<img
+						id="profile-pic"
 						class="comment-dp img"
-						src="../../assets/comment-dp.png"
+						src="../../assets/profile-pic-initial.png"
 						alt=""
 					/>
 					<span class="comment-name">{{ comment_data.commentor_name }}</span>
@@ -66,10 +67,29 @@
 			async fetchUsername() {
 				await axios
 					.get(
-						`http://127.0.0.1:8000/api/users/user/${this.comment_data.reply_to}/`
+						`${this.$store.state.backend_url}/api/users/user/${this.comment_data.reply_to}/`
 					)
 					.then((response) => {
 						this.reply_to_username = 'Re: ' + response.data.user_name;
+						this.fetchProfilePic();
+					})
+					.catch((error) => {});
+			},
+			async fetchProfilePic() {
+				let headers = {
+					Authorization: 'Bearer ' + this.$store.state.accessToken,
+				};
+				await axios
+					.get(`${this.$store.state.backend_url}/api/users/image/`, {
+						headers: headers,
+					})
+					.then((response) => {
+						if (response.data[0].profile_pic != null) {
+							$('#profile-pic').attr(
+								'src',
+								`${this.$store.state.backend_url}${response.data[0].profile_pic}`
+							);
+						}
 					})
 					.catch((error) => {});
 			},
@@ -78,6 +98,12 @@
 			if (this.comment_data.reply_to != null) {
 				this.fetchUsername();
 				$('.reply-to').css('display', 'inline');
+
+				if (this.comment_data.commentor_type == 'seller') {
+					$('.comment-seller').css('background-color', '#f7941d');
+				} else {
+					$('.comment-seller').css('background-color', 'rgb(125, 79, 255)');
+				}
 			}
 			if (this.comment_data.commentor_type == 'none') {
 				$('.comment-seller').css('display', 'none');

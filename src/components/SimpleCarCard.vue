@@ -40,7 +40,10 @@
 
 <style scoped>
 	.car-pic {
-		width: 166px;
+		width: 100%;
+		height: 100px;
+		object-fit: cover;
+		object-position: center;
 	}
 
 	.car-name {
