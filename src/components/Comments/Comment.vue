@@ -83,6 +83,7 @@
 					)
 					.then((response) => {
 						this.reply_to_username = 'Re: ' + response.data.user_name;
+						this.fetchProfilePic();
 					})
 					.catch((error) => {});
 			},
@@ -106,7 +107,7 @@
 		mounted() {
 			if (this.comment_data.reply_to != null) {
 				this.fetchUsername();
-				this.fetchProfilePic();
+
 				$('.reply-to').css('display', 'inline');
 
 				if (this.comment_data.commentor_type == 'seller') {
