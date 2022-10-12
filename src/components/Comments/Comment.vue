@@ -129,8 +129,8 @@
 	.comment-dp {
 		border-radius: 50%;
 		padding: 0;
-		width: 50px;
-		height: 50px;
+		width: 30px;
+		height: 30px;
 	}
 
 	.comment-name {
