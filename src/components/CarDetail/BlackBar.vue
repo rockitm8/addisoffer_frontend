@@ -228,7 +228,7 @@
 		mounted() {
 			let bids_left = this.$store.state.bids_left;
 
-			console.log(this.car_data);
+			console.log(this.car_data.bid_days);
 
 			if (this.car_data.car_allowed) {
 				this.bid_allowed = 'car_allowed';
