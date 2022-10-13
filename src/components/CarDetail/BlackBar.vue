@@ -231,10 +231,12 @@
 			console.log(this.car_data.car_allowed);
 
 			if (this.car_data.car_allowed) {
+				console.log('1');
 				this.bid_allowed = 'car_allowed';
 			} else if (bids_left > 0) {
 				this.bid_allowed = 'bids_left';
 			} else {
+				console.log('3');
 				this.bid_allowed = null;
 			}
 			console.log(this.bid_allowed);
