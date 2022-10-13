@@ -227,7 +227,7 @@
 		},
 		mounted() {
 			let bids_left = this.$store.state.bids_left;
-			console.log(this.car_data.car_allowed);
+			console.log(this.car_data);
 			if (this.car_data.car_allowed) {
 				this.bid_allowed = 'car_allowed';
 			} else if (bids_left > 0) {
