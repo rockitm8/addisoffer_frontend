@@ -72,8 +72,11 @@
 					.catch((error) => {});
 			},
 			fetchCarAllowed() {
+				let data = {
+					car_id: this.car_data,
+				};
 				axiosInstanceBearer
-					.get(`/api/allowed-bid/`, { params: { car_id: this.car_data.id } })
+					.get(`/api/allowed-bid/`, data)
 					.then((response) => {
 						this.car_data.car_allowed = response.data;
 					})
