@@ -88,7 +88,7 @@
 		watch: {
 			car_data: {
 				handler() {
-					if (this.car_data == [] && this.car_data.car_allowed != undefined) {
+					if (this.car_data == [] && !('car_allowed' in this.car_data)) {
 						this.car_data_fetched = false;
 					} else {
 						this.car_data_fetched = true;
