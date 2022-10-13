@@ -58,11 +58,11 @@
 				await axios
 					.get(`${this.$store.state.backend_url}/api/cars/${car_id}/`)
 					.then((response) => {
-						this.car_data = response.data;
-						this.$store.state.singleCarData = this.car_data;
 						if (this.$store.state.header != 'Header') {
 							this.fetchCarAllowed();
 						}
+						this.car_data = response.data;
+						this.$store.state.singleCarData = this.car_data;
 					})
 					.catch((error) => {});
 			},
