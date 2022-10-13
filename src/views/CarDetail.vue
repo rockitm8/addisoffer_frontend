@@ -60,6 +60,9 @@
 					.then((response) => {
 						this.car_data = response.data;
 						this.$store.state.singleCarData = this.car_data;
+						if (this.$store.state.header != 'Header') {
+							this.fetchCarAllowed();
+						}
 					})
 					.catch((error) => {});
 			},
@@ -101,7 +104,6 @@
 			this.fetchCar();
 			if (this.$store.state.header != 'Header') {
 				this.fetchBidsLeft();
-				this.fetchCarAllowed();
 			}
 		},
 		components: {
