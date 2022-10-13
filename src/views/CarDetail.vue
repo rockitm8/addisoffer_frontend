@@ -79,7 +79,6 @@
 					.get(`/api/allowed-bid/`, { params: { car_id: this.car_data.id } })
 					.then((response) => {
 						this.car_data.car_allowed = response.data;
-						console.log(this.car_data);
 					})
 					.catch((error) => {
 						console.log(error);
