@@ -88,11 +88,13 @@
 		watch: {
 			car_data: {
 				handler() {
+					console.log(!('car_allowed' in this.car_data));
 					if (this.car_data == [] && !('car_allowed' in this.car_data)) {
 						this.car_data_fetched = false;
 					} else {
 						this.car_data_fetched = true;
 					}
+					console.log(this.car_data_fetched);
 				},
 			},
 		},
