@@ -94,7 +94,7 @@
 					} else {
 						this.car_data_fetched = true;
 					}
-					console.log(this.car_data_fetched);
+					console.log(this.car_data);
 				},
 			},
 		},
