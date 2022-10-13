@@ -81,7 +81,7 @@
 
 					<div class="col-3 buttons">
 						<div v-if="!time_ended">
-							<div v-if="bid_allowed">
+							<div v-if="bid_allowed != null">
 								<button
 									@click="triggerPlaceBidModal"
 									type="button"
@@ -112,6 +112,7 @@
 							@close="triggerPlaceBidModal"
 							:showModal="isPlaceBidActive"
 							:car_data="car_data"
+							:bid_allowed="bid_allowed"
 						/>
 						<ShareModal @close="triggerShareModal" :showModal="isShareActive" />
 					</div>
@@ -142,7 +143,7 @@
 				isShareActive: false,
 				isRegisterBidActive: false,
 				isPlaceBidActive: false,
-				bid_allowed: false,
+				bid_allowed: null,
 				intervalId: null,
 				displayTime: null,
 				time_ended: false,
@@ -226,8 +227,13 @@
 		},
 		mounted() {
 			let bids_left = this.$store.state.bids_left;
-			if (bids_left > 0) this.bid_allowed = true;
-			else this.bid_allowed = false;
+			if (this.car_data.car_allowed) {
+				this.bid_allowed = 'car_allowed';
+			} else if (bids_left > 0) {
+				this.bid_allowed = 'bids_left';
+			} else {
+				this.bid_allowed = null;
+			}
 
 			let nowTime = moment();
 			let carTime = moment(this.car_data.time_left);

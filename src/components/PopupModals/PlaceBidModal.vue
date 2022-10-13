@@ -40,13 +40,13 @@
 			car_data: {
 				default: [],
 			},
+			bid_allowed: String,
 		},
 		data() {
 			return {
 				bid_amount: '',
 				formError: '',
 				errorTxt: false,
-				bid_allowed: false,
 				highest_bid: 0,
 			};
 		},
@@ -131,58 +131,94 @@
 					bid_amount: this.bid_amount,
 					bidder: this.$store.state.accessToken,
 				};
+				this.errorTxt = false;
+				this.formError = 'Bid processing, please wait!';
 
-				await axiosInstanceBearer
-					.post(`/api/bids/`, data)
-					.then((response) => {
-						this.$store.state.singleCarData.total_bids += 1;
-						this.$store.state.singleCarData.high_bid = this.bid_amount;
-						this.$store.state.bids_left -= 1;
-						let updatedUser = this.$store.state.logged_user;
-						updatedUser.bids_left = this.$store.state.bids_left;
-						this.errorTxt = false;
-						this.formError = 'Bid processing, please wait!';
-						axiosInstance
-							.patch(
-								`/api/cars/${this.$store.state.singleCarData.id}/`,
-								this.$store.state.singleCarData
-							)
-							.then((response) => {})
-							.catch((error) => {});
-						axiosInstance
-							.patch(
-								`/api/users/update/${this.$store.state.logged_user.id}/`,
-								updatedUser
-							)
-							.then((response) => {})
-							.catch((error) => {});
-						let commentData = {
-							reply_to: null,
-							comment: 'Bid: ETB ' + this.bid_amount,
-							accessToken: this.$store.state.accessToken,
-							commented_on: this.$route.params.id,
-							bid: true,
-						};
+				if (this.bid_allowed == 'car_allowed') {
+					await axiosInstanceBearer
+						.post(`/api/bids/`, data)
+						.then((response) => {
+							let commentData = {
+								reply_to: null,
+								comment: 'Bid: ETB ' + this.bid_amount,
+								accessToken: this.$store.state.accessToken,
+								commented_on: this.$route.params.id,
+								bid: true,
+							};
 
-						let data = {
-							car_id: this.$store.state.singleCarData.id,
-							last_bid: this.highest_bid,
-						};
-						axiosInstance
-							.post('api/users/email-is-new-bid/', data)
-							.then((response) => {})
-							.catch((error) => {});
-						axiosInstance
-							.post('api/users/email-is-out-bid/', data)
-							.then((response) => {
-								this.$store.dispatch('submitComment', commentData);
-							})
-							.catch((error) => {});
-					})
-					.catch((error) => {
-						this.errorTxt = true;
-						this.formError = "Sellers can't bid on their cars.";
-					});
+							let data = {
+								car_id: this.$store.state.singleCarData.id,
+								last_bid: this.highest_bid,
+							};
+							axiosInstance
+								.post('api/users/email-is-new-bid/', data)
+								.then((response) => {})
+								.catch((error) => {});
+							axiosInstance
+								.post('api/users/email-is-out-bid/', data)
+								.then((response) => {
+									this.$store.dispatch('submitComment', commentData);
+								})
+								.catch((error) => {});
+						})
+						.catch((error) => {
+							this.errorTxt = true;
+							this.formError = "Sellers can't bid on their cars.";
+						});
+				} else {
+					await axiosInstanceBearer
+						.post(`/api/bids/`, data)
+						.then((response) => {
+							this.$store.state.singleCarData.total_bids += 1;
+							this.$store.state.singleCarData.high_bid = this.bid_amount;
+							this.$store.state.bids_left -= 1;
+							let updatedUser = this.$store.state.logged_user;
+							updatedUser.bids_left = this.$store.state.bids_left;
+
+							// POSTTTT
+
+							axiosInstance
+								.patch(
+									`/api/cars/${this.$store.state.singleCarData.id}/`,
+									this.$store.state.singleCarData
+								)
+								.then((response) => {})
+								.catch((error) => {});
+							axiosInstance
+								.patch(
+									`/api/users/update/${this.$store.state.logged_user.id}/`,
+									updatedUser
+								)
+								.then((response) => {})
+								.catch((error) => {});
+							let commentData = {
+								reply_to: null,
+								comment: 'Bid: ETB ' + this.bid_amount,
+								accessToken: this.$store.state.accessToken,
+								commented_on: this.$route.params.id,
+								bid: true,
+							};
+
+							let data = {
+								car_id: this.$store.state.singleCarData.id,
+								last_bid: this.highest_bid,
+							};
+							axiosInstance
+								.post('api/users/email-is-new-bid/', data)
+								.then((response) => {})
+								.catch((error) => {});
+							axiosInstance
+								.post('api/users/email-is-out-bid/', data)
+								.then((response) => {
+									this.$store.dispatch('submitComment', commentData);
+								})
+								.catch((error) => {});
+						})
+						.catch((error) => {
+							this.errorTxt = true;
+							this.formError = "Sellers can't bid on their cars.";
+						});
+				}
 			},
 		},
 		watch: {
@@ -196,11 +232,6 @@
 		},
 		mounted() {
 			this.$store.dispatch('fetchUser');
-			if (this.$store.state.bids_left > 0) {
-				this.bid_allowed = true;
-			} else {
-				this.bid_allowed = false;
-			}
 		},
 		components: { FormError },
 	};

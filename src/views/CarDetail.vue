@@ -63,7 +63,6 @@
 					})
 					.catch((error) => {});
 			},
-
 			async fetchBidsLeft() {
 				await axiosInstanceBearer
 					.get(`/api/users/bids_left/`)
@@ -71,6 +70,17 @@
 						this.$store.state.bids_left = response.data.bids_left;
 					})
 					.catch((error) => {});
+			},
+			fetchCarAllowed() {
+				axiosInstanceBearer
+					.get(`/api/allowed-bid/`, { params: { car_id: this.car_data.id } })
+					.then((response) => {
+						console.log(response);
+						this.car_data.car_allowed = response.data;
+					})
+					.catch((error) => {
+						console.log(error);
+					});
 			},
 		},
 		watch: {
@@ -89,7 +99,10 @@
 			const body = document.body;
 			body.setAttribute('style', 'overflow: auto');
 			this.fetchCar();
-			if (this.$store.state.header != 'Header') this.fetchBidsLeft();
+			if (this.$store.state.header != 'Header') {
+				this.fetchBidsLeft();
+				this.fetchCarAllowed();
+			}
 		},
 		components: {
 			Gallery,
