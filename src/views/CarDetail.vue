@@ -75,8 +75,7 @@
 				axiosInstanceBearer
 					.get(`/api/allowed-bid/`, { params: { car_id: this.car_data.id } })
 					.then((response) => {
-						console.log('WHEFHRGWLGJKWELJGWE', response);
-						// this.car_data.car_allowed = response.data;
+						this.car_data.car_allowed = response.data;
 					})
 					.catch((error) => {
 						console.log(error);
