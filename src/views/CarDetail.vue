@@ -73,7 +73,7 @@
 			},
 			fetchCarAllowed() {
 				let data = {
-					car_id: this.car_data,
+					car_id: this.car_data.id,
 				};
 				axiosInstanceBearer
 					.get(`/api/allowed-bid/`, data)
