@@ -81,7 +81,7 @@
 
 					<div class="col-3 buttons">
 						<div v-if="!time_ended">
-							<div v-if="bid_allowed !== null">
+							<div v-if="bid_allowed != null">
 								<button
 									@click="triggerPlaceBidModal"
 									type="button"
@@ -235,7 +235,7 @@
 			} else {
 				this.bid_allowed = null;
 			}
-			console.log(this.bid_allowed);
+
 			let nowTime = moment();
 			let carTime = moment(this.car_data.time_left);
 			if (nowTime < carTime) this.setTime();
