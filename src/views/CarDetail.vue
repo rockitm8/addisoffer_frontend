@@ -82,7 +82,7 @@
 					.then((response) => {
 						// this.car_data.car_allowed = response.data;
 						this.car_allowed = response.data;
-						console.log(this.car_allowed);
+						console.log(this.$store.state.singleCarData);
 					})
 					.catch((error) => {
 						console.log(error);
