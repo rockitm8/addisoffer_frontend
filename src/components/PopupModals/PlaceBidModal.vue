@@ -186,7 +186,7 @@
 							let updatedUser = this.$store.state.logged_user;
 							updatedUser.bids_left = this.$store.state.bids_left;
 
-							axiosInstance
+							axiosInstanceBearer
 								.post(`/api/allowed-bid/`, data)
 								.then((response) => {})
 								.catch((error) => {
