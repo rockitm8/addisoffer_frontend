@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import dayjs from 'dayjs';
 
-const baseURL = 'http://35.231.121.122:8000';
+const baseURL = 'http://admin.addisoffer.com/';
 
 let authTokens = localStorage.getItem('authTokens')
 	? JSON.parse(localStorage.getItem('authTokens'))
