@@ -81,6 +81,7 @@
 					.then((response) => {
 						// this.car_data.car_allowed = response.data;
 						this.car_allowed = response.data;
+						console.log(this.car_allowed);
 					})
 					.catch((error) => {
 						console.log(error);
@@ -95,6 +96,7 @@
 					} else {
 						this.car_data_fetched = true;
 					}
+					console.log('here1:', this.car_data_fetched);
 				},
 			},
 			car_allowed: {
@@ -104,6 +106,7 @@
 					} else {
 						this.car_data_fetched = true;
 					}
+					console.log('here2:', this.car_data_fetched);
 				},
 			},
 		},
