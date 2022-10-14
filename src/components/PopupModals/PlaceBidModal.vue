@@ -138,6 +138,17 @@
 					await axiosInstanceBearer
 						.post(`/api/bids/`, data)
 						.then((response) => {
+							this.$store.state.singleCarData.total_bids += 1;
+							this.$store.state.singleCarData.high_bid = this.bid_amount;
+
+							axiosInstance
+								.patch(
+									`/api/cars/${this.$store.state.singleCarData.id}/`,
+									this.$store.state.singleCarData
+								)
+								.then((response) => {})
+								.catch((error) => {});
+
 							let commentData = {
 								reply_to: null,
 								comment: 'Bid: ETB ' + this.bid_amount,
