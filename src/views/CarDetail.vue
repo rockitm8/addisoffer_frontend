@@ -6,6 +6,7 @@
 			</div>
 			<Gallery :car_data="car_data" />
 			<div class="sticky-bar">
+				greeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee{{ car_allowed }}
 				<BlackBar :car_data="car_data" :car_allowed="car_allowed" />
 			</div>
 			<div class="table-specs-section">
