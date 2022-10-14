@@ -219,18 +219,18 @@
 								bid: true,
 							};
 
-							let data = {
+							let d = {
 								car_id: this.$store.state.singleCarData.id,
 								last_bid: this.highest_bid,
 							};
 							axiosInstance
-								.post('api/users/email-is-new-bid/', data)
+								.post('api/users/email-is-new-bid/', d)
 								.then((response) => {})
 								.catch((error) => {
 									console.log(error);
 								});
 							axiosInstance
-								.post('api/users/email-is-out-bid/', data)
+								.post('api/users/email-is-out-bid/', d)
 								.then((response) => {
 									this.$store.dispatch('submitComment', commentData);
 								})
