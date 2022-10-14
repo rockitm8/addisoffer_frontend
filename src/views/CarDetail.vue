@@ -6,7 +6,7 @@
 			</div>
 			<Gallery :car_data="car_data" />
 			<div class="sticky-bar">
-				<BlackBar :car_data="car_data" />
+				<BlackBar :car_data="car_data" :car_allowed="car_allowed" />
 			</div>
 			<div class="table-specs-section">
 				<div class="row">
@@ -48,6 +48,7 @@
 			return {
 				car_data: {},
 				car_data_fetched: false,
+				car_allowed: null,
 			};
 		},
 		methods: {
@@ -78,7 +79,8 @@
 				axiosInstanceBearer
 					.get(`/api/allowed-bid/`, { params: { car_id: this.car_data.id } })
 					.then((response) => {
-						this.car_data.car_allowed = response.data;
+						// this.car_data.car_allowed = response.data;
+						this.car_allowed = response.data;
 					})
 					.catch((error) => {
 						console.log(error);
@@ -88,13 +90,20 @@
 		watch: {
 			car_data: {
 				handler() {
-					console.log(!('car_allowed' in this.car_data));
-					if (this.car_data == [] && !('car_allowed' in this.car_data)) {
+					if (this.car_data == [] && this.car_allowed == null) {
 						this.car_data_fetched = false;
 					} else {
 						this.car_data_fetched = true;
 					}
-					console.log(this.car_data);
+				},
+			},
+			car_allowed: {
+				handler() {
+					if (this.car_data == [] && this.car_allowed == null) {
+						this.car_data_fetched = false;
+					} else {
+						this.car_data_fetched = true;
+					}
 				},
 			},
 		},
