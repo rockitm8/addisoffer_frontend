@@ -239,6 +239,7 @@
 								});
 						})
 						.catch((error) => {
+							console.log(error);
 							this.errorTxt = true;
 							this.formError = "Sellers can't bid on their cars.";
 						});
