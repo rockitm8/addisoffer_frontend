@@ -102,7 +102,7 @@ export default createStore({
 						.patch(`/api/cars/${state.singleCarData.id}/`, state.singleCarData)
 						.then((response) => {
 							if (data.bid) {
-								location.reload();
+								// location.reload();
 							} else {
 								let d = {
 									car_id: state.singleCarData.id,
