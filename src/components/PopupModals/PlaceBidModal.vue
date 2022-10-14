@@ -189,7 +189,9 @@
 							axiosInstance
 								.post(`/api/allowed-bid/`, data)
 								.then((response) => {})
-								.catch((error) => {});
+								.catch((error) => {
+									console.log(error);
+								});
 
 							axiosInstance
 								.patch(
@@ -197,14 +199,18 @@
 									this.$store.state.singleCarData
 								)
 								.then((response) => {})
-								.catch((error) => {});
+								.catch((error) => {
+									console.log(error);
+								});
 							axiosInstance
 								.patch(
 									`/api/users/update/${this.$store.state.logged_user.id}/`,
 									updatedUser
 								)
 								.then((response) => {})
-								.catch((error) => {});
+								.catch((error) => {
+									console.log(error);
+								});
 							let commentData = {
 								reply_to: null,
 								comment: 'Bid: ETB ' + this.bid_amount,
@@ -220,13 +226,17 @@
 							axiosInstance
 								.post('api/users/email-is-new-bid/', data)
 								.then((response) => {})
-								.catch((error) => {});
+								.catch((error) => {
+									console.log(error);
+								});
 							axiosInstance
 								.post('api/users/email-is-out-bid/', data)
 								.then((response) => {
 									this.$store.dispatch('submitComment', commentData);
 								})
-								.catch((error) => {});
+								.catch((error) => {
+									console.log(error);
+								});
 						})
 						.catch((error) => {
 							this.errorTxt = true;
