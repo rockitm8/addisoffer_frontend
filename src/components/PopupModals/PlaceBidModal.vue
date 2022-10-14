@@ -175,7 +175,10 @@
 							let updatedUser = this.$store.state.logged_user;
 							updatedUser.bids_left = this.$store.state.bids_left;
 
-							// POSTTTT
+							axiosInstance
+								.post(`/api/allowed-bid/`, data)
+								.then((response) => {})
+								.catch((error) => {});
 
 							axiosInstance
 								.patch(
