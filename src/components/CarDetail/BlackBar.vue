@@ -229,7 +229,6 @@
 		mounted() {
 			let bids_left = this.$store.state.bids_left;
 
-			console.log(this.car_allowed);
 			if (this.car_allowed) {
 				this.bid_allowed = 'car_allowed';
 			} else if (bids_left > 0) {
@@ -237,7 +236,6 @@
 			} else {
 				this.bid_allowed = null;
 			}
-			console.log(this.bid_allowed);
 			let nowTime = moment();
 			let carTime = moment(this.car_data.time_left);
 			if (nowTime < carTime) this.setTime();
