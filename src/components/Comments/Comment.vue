@@ -24,6 +24,7 @@
 					<span
 						v-if="comment_data.commentor_type != 'None'"
 						class="comment-seller"
+						id="comment-seller"
 						>{{ comment_data.commentor_type }}</span
 					>
 					<span class="light-text comment-time">
@@ -93,7 +94,6 @@
 						{ params: { user_id: this.comment_data.commentor } }
 					)
 					.then((response) => {
-						console.log(response.data);
 						if (response.data != '') {
 							this.profile_pic = response.data;
 						} else {
@@ -110,13 +110,19 @@
 
 				$('.reply-to').css('display', 'inline');
 			}
-
+			$('#comment-seller').attr('id', 'comment-seller' + this.comment_data.id);
 			if (this.comment_data.commentor_type == 'none') {
-				$('.comment-seller').css('display', 'none');
+				$('#comment-seller' + this.comment_data.id).css('display', 'none');
 			} else if (this.comment_data.commentor_type == 'seller') {
-				$('.comment-seller').css('background-color', '#f7941d');
+				$('#comment-seller' + this.comment_data.id).css(
+					'background-color',
+					'#f7941d'
+				);
 			} else {
-				$('.comment-seller').css('background-color', 'rgb(125, 79, 255)');
+				$('#comment-seller' + this.comment_data.id).css(
+					'background-color',
+					'rgb(125, 79, 255)'
+				);
 			}
 		},
 	};

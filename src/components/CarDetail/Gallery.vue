@@ -104,9 +104,6 @@
 		mounted() {
 			this.fetchImages();
 		},
-		updated() {
-			// $('.gallery-columns:nth-child(odd)').css('display', 'none');
-		},
 		watch: {
 			car_images: {
 				handler() {
