@@ -90,16 +90,16 @@
 			},
 		},
 		watch: {
-			car_data: {
-				handler() {
-					if (this.car_data == [] && this.car_allowed == null) {
-						this.car_data_fetched = false;
-					} else {
-						this.car_data_fetched = true;
-					}
-					console.log('here1:', this.car_data_fetched);
-				},
-			},
+			// car_data: {
+			// 	handler() {
+			// 		if (this.car_data == [] && this.car_allowed == null) {
+			// 			this.car_data_fetched = false;
+			// 		} else {
+			// 			this.car_data_fetched = true;
+			// 		}
+			// 		console.log('here1:', this.car_data_fetched);
+			// 	},
+			// },
 			car_allowed: {
 				handler() {
 					if (this.car_data == [] && this.car_allowed == null) {
