@@ -84,7 +84,7 @@
 								><font-awesome-icon class="fa-icon" icon="fa-solid fa-envelope"
 							/></a>
 						</div>
-						<p class="last-div my-1">© Copyright 2022 Cars and Bids LLC</p>
+						<p class="last-div my-1">© Copyright 2023 Subel Partners</p>
 						<a
 							class="link-footer last-div px-1"
 							href="../assets/documents/TermsofUse.pdf"
