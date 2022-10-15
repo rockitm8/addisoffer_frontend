@@ -80,7 +80,7 @@
 								class="social-links"
 								><font-awesome-icon icon="fa-brands fa-youtube"
 							/></a>
-							<a href="mailto:contact@addisoffer" class="social-links"
+							<a href="mailto:contact@addisoffer.com" class="social-links"
 								><font-awesome-icon class="fa-icon" icon="fa-solid fa-envelope"
 							/></a>
 						</div>
