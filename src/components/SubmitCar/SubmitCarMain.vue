@@ -4,13 +4,12 @@
 			<h1 id="top">Tell us about your car</h1>
 			<p>
 				Please give us some basics about yourself and the car you’d like to
-				sell. We’ll also need details about the car’s title status as well as 12
-				photos that highlight the car’s exterior and interior condition.
+				sell. We’ll also need details about the car’s status as well as photos
+				that highlight the car’s exterior and interior condition.
 				<br /><br />
 				We’ll respond to your application within a business day. Once accepted,
-				we’ll ask for more details and at least 50 high-res photos, then work
-				with you to build a custom and professional listing and get the auction
-				live.
+				we’ll work with you to build a custom and professional listing and get
+				the auction live.
 			</p>
 			<h3 class="app">Application</h3>
 
