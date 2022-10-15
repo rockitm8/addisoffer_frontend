@@ -139,6 +139,7 @@
 						this.triggerOtp();
 					})
 					.catch((error) => {
+						console.log(error);
 						let err = error.response.data.errors;
 						this.errorTxt = true;
 						for (const [key, value] of Object.entries(err)) {
