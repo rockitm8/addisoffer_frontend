@@ -636,7 +636,7 @@
 						});
 						picReader.readAsDataURL(files[i]);
 					}
-					this.car.image = files;
+					this.car.image = [...this.car.image, ...files];
 				} else {
 					alert("Your browser doesn't support the file API!");
 				}
