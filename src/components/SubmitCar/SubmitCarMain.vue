@@ -636,7 +636,8 @@
 						});
 						picReader.readAsDataURL(files[i]);
 					}
-					this.car.image = [...this.car.image, ...files];
+					let temp = this.car.image.concat(files);
+					this.car.image = temp;
 				} else {
 					alert("Your browser doesn't support the file API!");
 				}
