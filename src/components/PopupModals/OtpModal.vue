@@ -86,6 +86,7 @@
 						this.errorTxt = false;
 						this.formError = 'Registeration Successful!';
 						router.push({ name: 'auctions' });
+						this.closeOtpModal();
 					})
 					.catch((error) => {});
 			},

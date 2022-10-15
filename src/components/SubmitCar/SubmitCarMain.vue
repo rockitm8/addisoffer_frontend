@@ -495,7 +495,7 @@
 					highlight_modification: '',
 					known_flaws: '',
 					other_info: '',
-					image: [],
+					image: null,
 				},
 				formError: '',
 				errorTxt: false,
@@ -625,8 +625,17 @@
 					const files = event.target.files;
 					const output = document.querySelector('#resultImages');
 
-					for (let i = 0; i < files.length; i++) {
-						if (!files[i].type.match('image')) continue;
+					if (this.car.image == null) {
+						this.car.image = files;
+					} else {
+						console.log(Array.from(this.car.image).concat(Array.from(files)));
+						this.car.image = Array.from(this.car.image).concat(
+							Array.from(files)
+						);
+					}
+
+					for (let i = 0; i < this.car.image.length; i++) {
+						if (!this.car.image[i].type.match('image')) continue;
 						const picReader = new FileReader();
 						picReader.addEventListener('load', (e) => {
 							const picFile = e.target;
@@ -634,10 +643,8 @@
 							div.innerHTML = `<div class="grid-container-imgs"><img class="thumbnail" width="200px" height="auto" src="${picFile.result}" title="${picFile.name}" /></div>`;
 							output.appendChild(div);
 						});
-						picReader.readAsDataURL(files[i]);
+						picReader.readAsDataURL(this.car.image[i]);
 					}
-					let temp = this.car.image.concat(files);
-					this.car.image = temp;
 				} else {
 					alert("Your browser doesn't support the file API!");
 				}
@@ -645,6 +652,7 @@
 			clearPhotos() {
 				$('#myFiles').val('');
 				$('#resultImages').html('');
+				this.car.image = null;
 			},
 		},
 		components: { FormError },
