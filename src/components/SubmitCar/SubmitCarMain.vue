@@ -563,7 +563,7 @@
 						'* You must allow the bidding days for atmost 15 days';
 					return;
 				}
-				if (this.car.image.length < 10) {
+				if (this.car.image.length < 1) {
 					this.errorTxt = true;
 					this.formError = '* You must upload atleast 10 images';
 					return;
