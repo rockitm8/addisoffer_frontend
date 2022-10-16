@@ -455,7 +455,12 @@
 						</div>
 					</div>
 				</div>
-				<button @click="checkForm" type="button" class="btn submit-car-btn">
+				<button
+					id="submitCarBtn"
+					@click="checkForm"
+					type="button"
+					class="btn submit-car-btn"
+				>
 					Submit
 				</button>
 			</form>
@@ -586,10 +591,12 @@
 					car: formData,
 					accessToken: storeState.accessToken,
 				};
-
-				this.$store.dispatch('submitCarData', data);
+				$('#submitCarBtn').prop('disabled', 'true');
 				this.errorTxt = false;
 				this.formError = 'Processing data, please wait.';
+				this.$store.dispatch('submitCarData', data);
+				$('#submitCarBtn').prop('disabled', 'true');
+				this.formError = '';
 			},
 			checkSellerType() {
 				this.car.seller_type = $('input[name=sellerType]:checked')[0].value;

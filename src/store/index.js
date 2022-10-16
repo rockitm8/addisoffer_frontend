@@ -46,6 +46,7 @@ export default createStore({
 			state.notifications = {};
 			state.settings = {};
 			window.localStorage.clear();
+			// router.go({ name: 'auctions' });
 			router.push({ name: 'auctions' });
 			location.reload();
 		},
@@ -70,8 +71,8 @@ export default createStore({
 				});
 		},
 
-		async submitCarData({ commit, state }, data) {
-			await axiosInstanceBearer
+		submitCarData({ commit, state }, data) {
+			axiosInstanceBearer
 				.post(`/api/cars/`, data.car)
 				.then((response) => {
 					router.push({ name: 'auctions' });
