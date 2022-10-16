@@ -58,11 +58,17 @@
 		</div>
 
 		<h2 class="three-h">Recent Sales</h2>
-		<div class="grid-container">
-			<div class="grid-item" v-for="i in 4" :key="i">
-				<img class="car-pic" src="../../assets/car1.png" /> <br />
+		<div class="no-sales" v-if="car_list == null">
+			<span> NO SALES YET</span>
+		</div>
+		<div v-else>
+			<div class="grid-container">
+				<div class="grid-item" v-for="(item, i) in car_list" :key="i">
+					<!-- <img class="car-pic" src="../../assets/car1.png" /> <br />
 				<span class="recent-prize">Sold for $138,000</span> <br />
-				<span class="recent-years">2022 Rivian R1T Launch Edition</span>
+				<span class="recent-years">2022 Rivian R1T Launch Edition</span> -->
+					<SimpleCarCard page="sellcar" :car_data="item" />
+				</div>
 			</div>
 		</div>
 
@@ -119,6 +125,7 @@
 <script>
 	import $ from 'jquery';
 	import axios from 'axios';
+	import SimpleCarCard from '../SimpleCarCard.vue';
 
 	export default {
 		name: 'SellCarMain',
@@ -127,6 +134,7 @@
 				auctions_completed: null,
 				value_cars_sold: null,
 				registered_members: null,
+				car_list: [],
 			};
 		},
 		methods: {
@@ -151,15 +159,36 @@
 					})
 					.catch((error) => {});
 			},
+			async fetchMyList() {
+				await axios
+					.get(`${this.$store.state.backend_url}/api/car-results/`)
+					.then((response) => {
+						if (response.data[0] == undefined) this.car_list = null;
+						else {
+							for (let i = 0; i < response.data.length; i++) {
+								if (i > 4) break;
+								if (response.data[i].high_bid > response.data[i].reserve_bid)
+									this.car_list[i] = response.data[i];
+							}
+						}
+					})
+					.catch((error) => {});
+			},
 		},
 		mounted() {
 			this.fetchCarStats();
 			this.fetchRegisteredMembers();
+			this.fetchMyList();
 		},
+		components: { SimpleCarCard },
 	};
 </script>
 
 <style scoped>
+	.no-sales {
+		text-align: center;
+	}
+
 	.grid-container {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);

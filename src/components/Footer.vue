@@ -72,7 +72,7 @@
 								class="social-links"
 								><font-awesome-icon icon="fa-brands fa-instagram"
 							/></a>
-							<a href="T.me/addis_offer" class="social-links"
+							<a href="https://T.me/addis_offer" class="social-links"
 								><font-awesome-icon icon="fa-brands fa-telegram"
 							/></a>
 							<a

@@ -1,6 +1,9 @@
 <template>
 	<div class="simple">
 		<img class="car-pic" :src="main_image" /> <br />
+		<div v-if="page == 'sellcar'">
+			<span class="sold-for">Sold for ETB {{ car_data.high_bid }}</span>
+		</div>
 		<span class="car-name"
 			>{{ car_data.year }} {{ car_data.make }} {{ car_data.model }}</span
 		>
@@ -14,6 +17,7 @@
 		name: 'SimpleCarCard',
 		props: {
 			car_data: [],
+			page: String,
 		},
 		data() {
 			return {
@@ -39,6 +43,9 @@
 </script>
 
 <style scoped>
+	.sold-for {
+		font-weight: 700;
+	}
 	.car-pic {
 		width: 100%;
 		height: 100px;

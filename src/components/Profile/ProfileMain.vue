@@ -37,7 +37,7 @@
 						<div class="car-list-area">
 							<div class="grid-container">
 								<div class="grid-item" v-for="(item, i) in car_list" :key="i">
-									<SimpleCarCard :car_data="item" />
+									<SimpleCarCard page="profile" :car_data="item" />
 								</div>
 							</div>
 						</div>
@@ -222,7 +222,7 @@
 					email_is_out_bid: '0',
 				},
 				file: {},
-				car_list: null,
+				car_list: [],
 			};
 		},
 		methods: {
@@ -298,7 +298,9 @@
 				await axiosInstanceBearer
 					.get(`/api/user-cars/`)
 					.then((response) => {
-						this.car_list = response.data;
+						if (response.data[0] == undefined) {
+							this.car_list = null;
+						} else this.car_list = response.data;
 					})
 					.catch((error) => {});
 			},
