@@ -338,7 +338,7 @@
 
 	.rate {
 		color: black;
-		font-size: 45px;
+		font-size: 30px;
 		font-weight: 700;
 		display: inline-block;
 		border-bottom: 7px solid #ffe55f;

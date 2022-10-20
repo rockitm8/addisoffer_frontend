@@ -260,7 +260,7 @@
 						</div>
 						<div class="grid-container2">
 							<div>
-								<p>Mileage (in miles)</p>
+								<p>Mileage (in km)</p>
 								<input
 									v-model="car.mileage"
 									class="txt-input"
@@ -671,7 +671,6 @@
 <style scoped>
 	/* sec 1 */
 	.content-box {
-		font-family: 'segoe ui';
 		margin: auto;
 		max-width: 576px;
 	}
@@ -832,7 +831,6 @@
 	.choose-photo {
 		text-align: center;
 		padding: 0.5rem;
-		font-family: sans-serif;
 		border-radius: 0.3rem;
 		cursor: pointer;
 		border: 1px solid #828282;
@@ -845,7 +843,6 @@
 		text-align: center;
 		/* padding: 0.5rem; */
 		margin-left: 20px;
-		font-family: sans-serif;
 		border-radius: 0.3rem;
 		cursor: pointer;
 		/* border: 1px solid #828282; */
