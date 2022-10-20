@@ -1,5 +1,5 @@
 <template>
-	<div class="black-bar">
+	<div class="black-bar" :id="`car` + car_data.id">
 		<div class="row">
 			<div class="col-12">
 				<div class="row">
@@ -7,26 +7,26 @@
 						<ul class="bid-stats">
 							<div v-if="!time_ended">
 								<li class="time-left">
-									<span class="time-icon">
+									<span class="time-icon all-icons">
 										<i class="fa fa-clock-o"></i>
 										<span>Time Left</span>
 									</span>
 									<span class="time-value">{{ displayTime }}</span>
 								</li>
 								<li class="high-bid">
-									<span class="bid-icon"
+									<span class="bid-icon all-icons"
 										><span><i class="fa fa-arrow-up"></i></span> High Bid</span
 									>
 									<span class="bid-value">ETB {{ car_data.high_bid }}</span>
 								</li>
 								<li class="bids">
-									<span class="bids-icon">
+									<span class="bids-icon all-icons">
 										<span class="hash">#</span> Bids</span
 									>
 									<span class="bids-value">{{ car_data.total_bids }}</span>
 								</li>
 								<li class="comments">
-									<span class="comments-icon">
+									<span class="comments-icon all-icons">
 										<span><i class="fa fa-comments"></i></span> Comments</span
 									>
 									<span class="comments-value">
@@ -34,7 +34,7 @@
 									</span>
 								</li>
 								<li class="view">
-									<span class="view-icon">
+									<span class="view-icon all-icons">
 										<span><i class="fa fa-eye"></i></span> Views</span
 									>
 									<span class="view-value">{{ car_data.views }}</span>
@@ -187,6 +187,14 @@
 						}
 						if (parseInt(splitTime[2]) < 10) {
 							splitTime[2] = '0' + splitTime[2];
+						}
+
+						if (carTime.diff(nowTime, 'hours') < 1) {
+							$(`#car${this.car_data.id} .bid-stats`).css(
+								'background-color',
+								'rgb(241, 81, 73)'
+							);
+							$(`#car${this.car_data.id} .all-icons`).css('color', 'white');
 						}
 						this.displayTime = splitTime.join(':');
 					} else if (carTime.diff(nowTime, 'days') == 1) {

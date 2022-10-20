@@ -17,6 +17,7 @@ export default createStore({
 				/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[-!$%^@&*()_+|~=`{}\[\]:";'<>?,.\/]).{8,}$/
 			),
 			numberRule: new RegExp(/^[0-9]+$/),
+			alphabetRule: new RegExp(/^[A-Z a-z]+$/),
 		},
 		header: 'Header',
 		accessToken: '',

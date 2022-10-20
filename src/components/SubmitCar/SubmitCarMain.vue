@@ -293,7 +293,7 @@
 									aria-label="Default select example"
 									name="start-year"
 								>
-									<option value="All">All</option>
+									<option value="New">New</option>
 									<option value="Taxi">Taxi</option>
 									<option value="Private">Private</option>
 									<option value="Commercial (Business)">
@@ -577,6 +577,10 @@
 
 				for (var key in this.car) {
 					if (key !== 'image') {
+						if (storeRules.alphabetRule.test(this.car[key])) {
+							this.car[key] =
+								this.car[key].charAt(0).toUpperCase() + this.car[key].slice(1);
+						}
 						formData.append(key, this.car[key]);
 					}
 				}

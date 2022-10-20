@@ -10,13 +10,13 @@
 					<ul id="time-ending" class="bid-stats">
 						<div v-if="page == 'auction' || page == 'ending'">
 							<li class="time-left">
-								<span class="time-icon">
+								<span class="time-icon all-icons">
 									<font-awesome-icon icon="fa-solid fa-clock" />
 								</span>
 								<span class="time-value">{{ displayTime }}</span>
 							</li>
 							<li class="high-bid">
-								<span class="bid-icon">Bid</span>
+								<span class="bid-icon all-icons">Bid</span>
 								<span class="bid-value">ETB {{ car_data.high_bid }}</span>
 							</li>
 						</div>
@@ -120,9 +120,11 @@
 						this.displayTime = splitTime.join(':');
 
 						if (carTime.diff(nowTime, 'hours') < 1) {
-							$('.bid-stats').css('background-color', 'rgb(241, 81, 73)');
-						} else {
-							$('.bid-stats').css('background-color', 'rgb(38, 38, 38)');
+							$(`#car${this.car_data.id} .bid-stats`).css(
+								'background-color',
+								'rgb(241, 81, 73)'
+							);
+							$(`#car${this.car_data.id} .all-icons`).css('color', 'white');
 						}
 					} else if (carTime.diff(nowTime, 'days') == 1) {
 						this.displayTime = '1 day';
@@ -164,9 +166,6 @@
 			if (this.page == 'auction' || this.page == 'ending') {
 				this.setTime();
 			}
-		},
-		unmounted() {
-			// clearInterval(this.intervalId);
 		},
 	};
 </script>

@@ -231,6 +231,15 @@
 							</li>
 							<li>
 								<button
+									@click="plateCodeFilter('New')"
+									class="dropdown-item"
+									type="button"
+								>
+									New
+								</button>
+							</li>
+							<li>
+								<button
 									@click="plateCodeFilter('Taxi')"
 									class="dropdown-item"
 									type="button"
@@ -323,7 +332,10 @@
 					</div>
 				</div>
 			</div>
-			<div v-if="heading_text == 'Auctions'" class="col-xxl-5 col-lg-8 col-12 pb-3 filter-sorts-col">
+			<div
+				v-if="heading_text == 'Auctions'"
+				class="col-xxl-5 col-lg-8 col-12 pb-3 filter-sorts-col"
+			>
 				<div class="filter-sorts-wrapper">
 					<ul class="filter-sorts">
 						<li @click="toggle_filter1">
