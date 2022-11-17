@@ -30,13 +30,13 @@
       <div class="col-md-6 col-12 pt-md-0 pt-5">
         <h6>Our customers love us!</h6>
         <div class="stars-holder">
-          <span v-for="i in 5" :key="i"
+          <span v-for="i in review_stars" :key="i"
             ><img class="star" src="../assets/star-yellow.png" alt=""
           /></span>
         </div>
 
-        <span class="comment-name">Abdullah M.</span>
-        <span class="comment-date">Jun 2022</span>
+        <span class="comment-name">{{ review_name }}</span>
+        <span class="comment-date">{{ review_date }}</span>
         <p class="comment-heading">
           {{ review }}
         </p>
@@ -58,6 +58,9 @@
         value_cars_sold: null,
         registered_members: null,
         review: '',
+        review_date: '',
+        review_name: '',
+        review_stars: 5,
       };
     },
     methods: {
@@ -83,6 +86,9 @@
           .get(`${this.$store.state.backend_url}/api/changes/`)
           .then((response) => {
             this.review = response.data[0].review;
+            this.review_name = response.data[0].review_name;
+            this.review_date = response.data[0].review_date;
+            this.review_stars = response.data[0].review_stars;
           })
           .catch((error) => {});
       },
