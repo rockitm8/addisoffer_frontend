@@ -11,7 +11,10 @@
         >
         <br />
         <span class="contact-h">Phone: </span
-        ><span class="contact-p">+251910932337 and +251703932337</span>
+        ><span class="contact-p"
+          >+251910932337 <br />
+          +251703932337</span
+        >
       </div>
     </div>
 
@@ -21,7 +24,9 @@
     <div class="row">
       <div class="col-lg-4 col-md-3 col-4">
         <p class="mail-p">
-          Gerji Mebrat Hail, Alem Gebre Building 4th Floor #406
+          Gerji Mebrat Hail, <br />
+          Alem Gebre Building, <br />
+          4th Floor #406
         </p>
       </div>
       <div class="col-3">

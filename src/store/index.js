@@ -27,7 +27,7 @@ export default createStore({
     bids_left: 0,
     settings: {},
     search_text: '',
-    backend_url: 'http://admin.addisoffer.com',
+    backend_url: 'https://admin.addisoffer.com',
     notifications: {},
   },
   mutations: {
