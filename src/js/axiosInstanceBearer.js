@@ -16,6 +16,8 @@ const axiosInstanceBearer = axios.create({
   withCredentials: true,
 });
 
+axios.defaults.withCredentials = true;
+
 axiosInstanceBearer.interceptors.request.use(async (req) => {
   if (!authTokens) {
     authTokens = localStorage.getItem('authTokens')
