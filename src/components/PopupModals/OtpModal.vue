@@ -80,7 +80,10 @@
         await axios
           .post(
             `${this.$store.state.backend_url}/api/users/otp-verification/`,
-            data
+            data,
+            {
+              withCredentials: true,
+            }
           )
           .then((response) => {
             this.errorTxt = false;

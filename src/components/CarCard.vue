@@ -141,12 +141,17 @@
           car_id: this.car_data.id,
         };
         await axios
-          .post(`${this.$store.state.backend_url}/api/cars-status-end/`, data)
+          .post(`${this.$store.state.backend_url}/api/cars-status-end/`, data, {
+            withCredentials: true,
+          })
           .then((response) => {
             axios
               .post(
                 `${this.$store.state.backend_url}/api/users/email-is-auction-end/`,
-                data
+                data,
+                {
+                  withCredentials: true,
+                }
               )
               .then((response) => {
                 location.reload();
