@@ -63,7 +63,9 @@ export default createStore({
   actions: {
     async submitLogout({ commit, state }) {
       await axiosInstance
-        .post(`/api/users/logout/`)
+        .post(`/api/users/logout/`, {
+          withCredentials: true,
+        })
         .then((response) => {
           commit('logoutSuccess');
           commit('toggleHeader');
@@ -75,7 +77,9 @@ export default createStore({
 
     submitCarData({ commit, state }, data) {
       axiosInstanceBearer
-        .post(`/api/cars/`, data.car)
+        .post(`/api/cars/`, data.car, {
+          withCredentials: true,
+        })
         .then((response) => {
           router.push({ name: 'auctions' });
           alert('Car submitted for inspection.');
@@ -98,7 +102,9 @@ export default createStore({
 
     async submitComment({ commit, state }, data) {
       await axiosInstanceBearer
-        .post(`/api/comments/`, data)
+        .post(`/api/comments/`, data, {
+          withCredentials: true,
+        })
         .then((response) => {
           state.singleCarData.total_comments += 1;
           axiosInstance
@@ -112,7 +118,9 @@ export default createStore({
                   car_id: state.singleCarData.id,
                 };
                 axiosInstance
-                  .post('/api/users/email-is-new-comment/', d)
+                  .post('/api/users/email-is-new-comment/', d, {
+                    withCredentials: true,
+                  })
                   .then((response) => {
                     location.reload();
                   })
