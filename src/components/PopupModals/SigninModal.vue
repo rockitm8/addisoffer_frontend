@@ -103,7 +103,9 @@
       },
       async submitLogin(user) {
         await axios
-          .post(`${this.$store.state.backend_url}/api/users/login/`, user)
+          .post(`${this.$store.state.backend_url}/api/users/login/`, user, {
+            withCredentials: true,
+          })
           .then((response) => {
             localStorage.setItem(
               'authTokens',
