@@ -13,6 +13,7 @@ const axiosInstanceBearer = axios.create({
   headers: {
     Authorization: `${authTokens?.access}`,
   },
+  withCredentials: true,
 });
 
 axiosInstanceBearer.interceptors.request.use(async (req) => {

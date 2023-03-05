@@ -227,9 +227,7 @@
           })
           .then((response) => {
             axiosInstance
-              .post(`/api/users/email-is-auction-end/`, data, {
-                withCredentials: true,
-              })
+              .post(`/api/users/email-is-auction-end/`, data)
               .then((response) => {
                 location.reload();
               })

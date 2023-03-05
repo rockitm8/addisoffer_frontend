@@ -136,9 +136,7 @@
 
         if (this.bid_allowed == 'car_allowed') {
           await axiosInstanceBearer
-            .post(`/api/bids/`, data, {
-              withCredentials: true,
-            })
+            .post(`/api/bids/`, data)
             .then((response) => {
               this.$store.state.singleCarData.total_bids += 1;
               this.$store.state.singleCarData.high_bid = this.bid_amount;
@@ -164,15 +162,11 @@
                 last_bid: this.highest_bid,
               };
               axiosInstance
-                .post('api/users/email-is-new-bid/', data, {
-                  withCredentials: true,
-                })
+                .post('api/users/email-is-new-bid/', data)
                 .then((response) => {})
                 .catch((error) => {});
               axiosInstance
-                .post('api/users/email-is-out-bid/', data, {
-                  withCredentials: true,
-                })
+                .post('api/users/email-is-out-bid/', data)
                 .then((response) => {
                   this.$store.dispatch('submitComment', commentData);
                 })
@@ -184,9 +178,7 @@
             });
         } else {
           await axiosInstanceBearer
-            .post(`/api/bids/`, data, {
-              withCredentials: true,
-            })
+            .post(`/api/bids/`, data)
             .then((response) => {
               this.$store.state.singleCarData.total_bids += 1;
               this.$store.state.singleCarData.high_bid = this.bid_amount;
@@ -195,9 +187,7 @@
               updatedUser.bids_left = this.$store.state.bids_left;
 
               axiosInstanceBearer
-                .post(`/api/allowed-bid/`, data, {
-                  withCredentials: true,
-                })
+                .post(`/api/allowed-bid/`, data)
                 .then((response) => {})
                 .catch((error) => {
                   console.log(error);
@@ -234,17 +224,13 @@
                 last_bid: this.highest_bid,
               };
               axiosInstance
-                .post('api/users/email-is-new-bid/', d, {
-                  withCredentials: true,
-                })
+                .post('api/users/email-is-new-bid/', d)
                 .then((response) => {})
                 .catch((error) => {
                   console.log(error);
                 });
               axiosInstance
-                .post('api/users/email-is-out-bid/', d, {
-                  withCredentials: true,
-                })
+                .post('api/users/email-is-out-bid/', d)
                 .then((response) => {
                   this.$store.dispatch('submitComment', commentData);
                 })

@@ -11,6 +11,7 @@ let authTokens = localStorage.getItem('authTokens')
 const axiosInstance = axios.create({
   baseURL,
   headers: { Authorization: `Bearer ${authTokens?.access}` },
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(async (req) => {
